@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>光启超级智能追踪系统</title>
+    <script>
+    addEventListener('resize', function f() {
+        var html = document.documentElement,
+            width = html.clientWidth,
+            height = html.clientHeight;
+        html.style.fontSize = (width > height * 1920 / 1080 ? height * 1920 / 1080 : width) * 100 / 1920 + 'px';
+        return f
+    }());
+    </script>
+    <link rel="stylesheet" type="text/css" href="lib/wui.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="css/page1.css">
+</head>
+
+<body>
+    <div class="header"></div>
+    <div class="container">
+        <div class="c1">
+            <div class="r1">
+                <div class="box bdi">
+                    <span class="hd">实时人数</span>
+                    <div class="bd">
+                    	<img src="img/m1.png" alt="">
+                    	<div class="ls">
+                    		<div class="it">
+                    			<span class="t">A区</span>
+                    			<span class="n">999</span>
+                    		</div>
+                    		<div class="it">
+                    			<span class="t">A区</span>
+                    			<span class="n">999</span>
+                    		</div>
+                    		<div class="it">
+                    			<span class="t">A区</span>
+                    			<span class="n">999</span>
+                    		</div>
+                    		<div class="it">
+                    			<span class="t">A区</span>
+                    			<span class="n">999</span>
+                    		</div>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="r2">
+                <div class="c1">
+                    <div class="box bdix">
+                    	<div id="chart"></div>
+                    	<div class="bd">
+                    		<span class="t">当前总人数</span>
+                    		<span class="n">23232</span>
+                    	</div>
+                    </div>
+                </div>
+                <div class="c2">
+                    <div class="box bdi2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="c2">
+            <div class="r1">
+                <div class="box bdi">
+                    <span class="hd">预测未来3分钟人数</span>
+                </div>
+            </div>
+            <div class="r1">
+                <div class="box bdi">
+                    <span class="hd">预测未来5分钟人数</span>
+                </div>
+            </div>
+            <div class="r1">
+                <div class="box bdi">
+                    <span class="hd">预测未来10分钟人数</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script src="lib/proto.js"></script>
+    <script src="lib/$.js"></script>
+    <script src="lib/echarts.min.js"></script>
+    <script>
+    	var chart = echarts.init(document.getElementById('chart'));
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            color:['#e76d1e','#1b64d5','#19dbd4','#13a436','#ecd514'],  //手动设置每个图例的颜色
+            legend: {
+                orient: 'horizontal',
+                left: 'center',
+                bottom: 0,
+                data: ['30%', '10%', '15%', '20%', '25%'],
+                textStyle:{    //图例文字的样式
+                    color:'#fff',  //文字颜色
+                    fontSize:12    //文字大小
+                }
+            },
+            series: [
+                {
+                    name:'总人数',
+                    type:'pie',
+                    radius: ['48%', '55%'],
+                    itemStyle : {  //图形样式
+                        normal : { //normal 是图形在默认状态下的样式；emphasis 是图形在高亮状态下的样式，比如在鼠标悬浮或者图例联动高亮时。
+                            label : {  //饼图图形上的文本标签
+                                show : true,  //平常不显示
+                                textStyle : {
+                                    fontSize : '12',
+                                    color:'#fff',
+                                }
+                            },
+                            labelLine : {     //标签的视觉引导线样式
+                                show : true,  //平常不显示
+                                textStyle : {
+                                    fontSize : '12',
+                                    color:'#fff',
+                                }
+                            }
+                        },
+                        emphasis : {   //normal 是图形在默认状态下的样式；emphasis 是图形在高亮状态下的样式，比如在鼠标悬浮或者图例联动高亮时。
+                            label : {  //饼图图形上的文本标签
+                                show : true,
+                                position : 'center',
+                                textStyle : {
+                                 fontSize : '10',
+                                 fontWeight : 'bold'
+                                 }
+                            }
+                        }
+                    },
+                    data:[
+                        {value:30, name:'广场B区 30%'},
+                        {value:10, name:'广场C区 10%'},
+                        {value:15, name:'广场D区 15%'},
+                        {value:20, name:'广场E区 20%'},
+                        {value:25, name:'广场A区 25%'},
+                    ]
+                }
+            ]
+        };
+        chart.setOption(option)
+        onresize = chart.resize
+    </script>
+</body>
+
+</html>

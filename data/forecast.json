@@ -1,0 +1,25 @@
+{
+    "error": 0,
+    "msg": "success",
+    "data":
+    {
+        "count": [
+        {
+            "areaId": 1,
+            "name": "A区",
+            "value": 123,
+            "level": 1,
+        },
+        {
+            "areaId": 1,
+            "name": "B区",
+            "value": 456,
+            "level": 2,
+        }],
+        "tip": [
+        {
+            "level": 1,
+            "msg": "A区人数持续增加，请及时调控",
+        }]
+    }
+}

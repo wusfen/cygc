@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>光启超级智能追踪系统</title>
+    <script>
+    addEventListener('resize', function f() {
+        var html = document.documentElement,
+            width = html.clientWidth,
+            height = html.clientHeight;
+        html.style.fontSize = (width > height * 1920 / 1080 ? height * 1920 / 1080 : width) * 100 / 1920 + 'px';
+        return f
+    }());
+    </script>
+    <style type="text/css">
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-size: 62.5%;
+    }
+
+    .bd {
+        border: solid 1px;
+    }
+
+    .bg {
+        background-color: rgba(0, 0, 0, .8) !important;
+    }
+
+    .fx {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+    }
+
+    .fxdc {
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -ms-flex-direction: column;
+        -o-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .aic {
+        -ms-align-items: center;
+        align-items: center;
+    }
+
+    .jcc {
+        justify-content: center;
+    }
+
+    .fxmc {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        -ms-align-items: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    html {
+        font-family: "Microsoft Yahei";
+    }
+
+    html {
+    	height: 100%;
+        background: #172450 url(img/bg.png) center;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+
+    .header {
+        width: 5.84rem;
+        height: 0.77rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: url(img/header.png) top no-repeat;
+        -webkit-background-size: contain;
+        background-size: contain;
+    }
+
+    .header{transition: .3s; z-index: 9;}
+    .header:hover{opacity: 0;}
+
+    .container {
+        width: 19.2rem;
+        height: 10.8rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .container .backdraw {
+        width: 100%;
+        height: 100%;
+        background: url(img/p1.l.png) center;
+        -webkit-background-size: contain;
+        background-size: contain;
+        opacity: .6;
+    }
+
+    .Ao {
+        width: 12.4rem;
+        height: 5.24rem;
+        background-color: #0e1f45;
+        position: absolute;
+        top: 1.18rem;
+        left: 0.36rem;
+        right: 0;
+        bottom: 0;
+        background: url(img/m1.png) center;
+        -webkit-background-size: contain;
+        background-size: contain;
+    }
+
+    .Ao .ls {
+        height: 2.92rem;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Ao .ls .it {
+        float: left;
+        width: 22%;
+        height: 100%;
+        background-color: rgba(244, 53, 40, 0.2);
+        border: solid 0.01rem #e13721;
+    }
+
+    .Ao .ls .it .t {
+        font-size: 0.2rem;
+        color: #2b7b7a;
+    }
+
+    .Ao .ls .it .n {
+        font-size: 0.48rem;
+        color: #2b7b7a;
+    }
+
+    .Bo {
+        width: 5.77rem;
+        height: 3.9rem;
+        position: absolute;
+        top: 6.7rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+    }
+
+    .Bo #chart {
+        width: 100%;
+        height: 100%;
+    }
+
+    .Bo .t {
+        font-size: 0.24rem;
+        color: #fcd300;
+        position: absolute;
+        top: 1.5rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Bo .n {
+        font-size: 0.47rem;
+        color: #fcd300;
+        position: absolute;
+        top: 1.83rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Co {}
+
+    .Co .map {
+        width: 6.16rem;
+        height: 3.61rem;
+        position: absolute;
+        top: 6.88rem;
+        left: 6.56rem;
+        right: 0;
+        bottom: 0;
+        background: url(img/m1.png) center;
+        -webkit-background-size: contain;
+        background-size: contain;
+    }
+
+    .R1 {
+        position: absolute;
+        top: 0.81rem;
+        left: 13.22rem;
+        right: 0;
+        bottom: 0;
+    }
+
+    .R2 {
+        position: absolute;
+        top: 4.1rem;
+        left: 13.22rem;
+        right: 0;
+        bottom: 0;
+    }
+
+    .R3 {
+        position: absolute;
+        top: 7.4rem;
+        left: 13.22rem;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Ro {
+        width: 5.79rem;
+        height: 3.24rem;
+    }
+
+    .Ro .ls {
+        width: 5.15rem;
+        height: 1.02rem;
+        position: absolute;
+        top: 0.63rem;
+        left: 0.25rem;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Ro .ls .it {
+        float: left;
+        width: 22%;
+        height: 100%;
+        width: 0.58rem;
+        height: 1.02rem;
+        background-color: rgba(77, 247, 117, 0.17);
+        border: solid 0.01rem #07c333;
+        position: relative;
+        text-align: center;
+    }
+
+    .Ro .ls .it .t {
+        font-size: 0.12rem;
+        color: #eeeeee;
+        line-height: 0.001rem;
+        position: absolute;
+        top: 1.14rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Ro .ls .it .n {
+        font-size: 0.17rem;
+        color: #ffffff;
+    }
+
+    .Ro .msg {
+        width: 5.15rem;
+        height: 0.7rem;
+        position: absolute;
+        top: 2.5rem;
+        left: 0.35rem;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Ro .msg .it {
+        line-height: 0;
+    }
+
+    .Ro .msg .it .dot {
+        display: inline-block;
+        border-radius: 9em;
+        width: 0.1rem;
+        height: 0.1rem;
+        background-color: #ff0000;
+    }
+
+    .Ro .msg .it .txt {
+        display: inline-block;
+        color: #ededed;
+        font-size: 0.14rem;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="header"></div>
+    <div id="vue" class="container">
+        <div class="backdraw"></div>
+        <!-- 实时人数 -->
+        <div class="Ao">
+            <div class="ls">
+                <div v-for="item in list" class="it fxmc fxdc">
+                    <div class="t">{{item.name}}</div>
+                    <div class="n">{{item.value}}</div>
+                </div>
+            </div>
+        </div>
+        <!-- 环图 -->
+        <div class="Bo">
+            <div class="ct">
+                <div class="t">当前总人数</div>
+                <div class="n">{{total}}</div>
+            </div>
+            <div id="chart"></div>
+        </div>
+        <!-- 区细分图 -->
+        <div class="Co">
+            <div class="map"></div>
+        </div>
+        <!-- 预测 -->
+        <div class="R1 Ro">
+            <div class="ls">
+                <div class="it fxmc">
+                    <div class="t">A区</div>
+                    <div class="n">9999</div>
+                </div>
+                <div class="it fxmc">
+                    <div class="t">A区</div>
+                    <div class="n">9999</div>
+                </div>
+                <div class="it fxmc">
+                    <div class="t">A区</div>
+                    <div class="n">9999</div>
+                </div>
+            </div>
+            <div class="msg">
+                <div class="it">
+                    <span class="dot"></span>
+                    <div class="txt">A区人数持续增加，请及时调控</div>
+                </div>
+                <div class="it">
+                    <span class="dot"></span>
+                    <div class="txt">A区人数持续增加，请及时调控</div>
+                </div>
+            </div>
+        </div>
+        <div class="R2 Ro">
+            <div class="ls">
+                <div class="it fxmc">
+                    <div class="t">A区</div>
+                    <div class="n">9999</div>
+                </div>
+                <div class="it fxmc">
+                    <div class="t">A区</div>
+                    <div class="n">9999</div>
+                </div>
+                <div class="it fxmc">
+                    <div class="t">A区</div>
+                    <div class="n">9999</div>
+                </div>
+            </div>
+            <div class="msg">
+                <div class="it">
+                    <span class="dot"></span>
+                    <div class="txt">A区人数持续增加，请及时调控</div>
+                </div>
+                <div class="it">
+                    <span class="dot"></span>
+                    <div class="txt">A区人数持续增加，请及时调控</div>
+                </div>
+            </div>
+        </div>
+        <div class="R3 Ro">
+            <div class="ls">
+                <div class="it fxmc">
+                    <div class="t">A区</div>
+                    <div class="n">9999</div>
+                </div>
+                <div class="it fxmc">
+                    <div class="t">A区</div>
+                    <div class="n">9999</div>
+                </div>
+                <div class="it fxmc">
+                    <div class="t">A区</div>
+                    <div class="n">9999</div>
+                </div>
+            </div>
+            <div class="msg">
+                <div class="it">
+                    <span class="dot"></span>
+                    <div class="txt">A区人数持续增加，请及时调控</div>
+                </div>
+                <div class="it">
+                    <span class="dot"></span>
+                    <div class="txt">A区人数持续增加，请及时调控</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script src="lib/proto.js"></script>
+    <script src="lib/$.js"></script>
+    <script src="lib/ajax.js"></script>
+    <script src="lib/echarts.min.js"></script>
+    <script>
+    ajax.base = ''
+
+    var vue = new Vue({
+        el: '#vue',
+        data: {
+            total: 0,
+            list: []
+        },
+        methods: {
+            loadCount: function() {
+                ajax({
+                    url: 'data/count.json',
+                    success: function(res) {
+                        var data = res.data || []
+                        vue.list = data
+
+                        vue.total = data.sum('value')
+                        // chart
+                        chart.setOption({
+                            series: {
+                                data: data
+                            }
+                        })
+                    }
+                })
+            }
+        },
+        mounted: function() {
+            vue = this
+
+            vue.loadCount()
+        }
+    })
+    </script>
+    <script>
+    var chart = echarts.init(document.getElementById('chart'));
+    var option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{b} {a} {c}"
+        },
+        color: ['#e76d1e', '#1b64d5', '#19dbd4', '#13a436', '#ecd514'], //手动设置每个图例的颜色
+        legend: {
+            orient: 'horizontal',
+            left: 'center',
+            bottom: 0,
+            data: ['30%', '10%', '15%', '20%', '25%'],
+            textStyle: { //图例文字的样式
+                color: '#fff', //文字颜色
+                fontSize: 12 //文字大小
+            }
+        },
+        series: [{
+            name: '人数',
+            type: 'pie',
+            radius: ['48%', '55%'],
+            itemStyle: { //图形样式
+                normal: { //normal 是图形在默认状态下的样式；emphasis 是图形在高亮状态下的样式，比如在鼠标悬浮或者图例联动高亮时。
+                    label: { //饼图图形上的文本标签
+                        show: true, //平常不显示
+                        textStyle: {
+                            fontSize: '12',
+                            color: '#fff',
+                        },
+                        formatter: function(obj) {
+                            return obj.name + ' ' + obj.percent + '%'
+                        }
+                    },
+                    labelLine: { //标签的视觉引导线样式
+                        show: true, //平常不显示
+                        textStyle: {
+                            fontSize: '12',
+                            color: '#fff',
+                        }
+                    }
+                },
+                emphasis: { //normal 是图形在默认状态下的样式；emphasis 是图形在高亮状态下的样式，比如在鼠标悬浮或者图例联动高亮时。
+                    label: { //饼图图形上的文本标签
+                        show: true,
+                        position: 'center',
+                        textStyle: {
+                            fontSize: '10',
+                            fontWeight: 'bold'
+                        },
+                    }
+                }
+            },
+            data: [
+                // { value: 10, name: 'A区' }
+            ]
+        }]
+    };
+    chart.setOption(option)
+    onresize = chart.resize
+    </script>
+</body>
+
+</html>

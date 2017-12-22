@@ -1,0 +1,100 @@
+/* grid */
+
+.container>.c1 {width: 68.75%; }
+.container>.c2 {width: 31.25%; }
+
+.container>.c1>.r1 {height: 58.32%; }
+.container>.c1>.r2 {height: 41.68%; }
+
+.container>.c1>.r2>.c1 {width: 42.86%; }
+.container>.c1>.r2>.c2 {width: 57.14%; }
+
+.container>.c2>.r1 {height: 33.33%; }
+
+
+
+/*box size*/
+
+.container>.c2>.c1>.box {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* content */
+.container>.c1>.r1>.box>.bd{width: 12.4rem; height: 5.24rem; position: absolute; top: auto; left: 0; right: 0; bottom: .15rem; margin: auto}
+.container>.c1>.r1>.box>.bd img{width: 100%;}
+.container>.c1>.r1>.box>.bd>.ls{position: absolute; bottom: 0; left: 0; right: 0; height: 3rem;}
+.container>.c1>.r1>.box>.bd>.ls>.it{
+    float: left; width: 22%; height: 100%; 
+    background-color: rgba(244, 52, 39, 0.17);
+    border: solid 0.01rem #e13721;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-shadow: 1px 2px 3px #fff
+}
+.container>.c1>.r1>.box>.bd>.ls>.it>.t{
+    font-size: 0.2rem;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0rem;
+    color: #2b7b7a;
+}
+.container>.c1>.r1>.box>.bd>.ls>.it>.n {
+    font-size: 0.48rem;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0rem;
+    color: #2b7b7a;
+
+    display: block;
+}
+
+/* chart */
+#chart{
+    width: 5rem;
+    height: 4rem;
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.container>.c1>.r2>.c1>.box>.bd{
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container>.c1>.r2>.c1>.box>.bd>.t{
+    font-size: 0.24rem;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0rem;
+    color: #fcd300;
+}
+.container>.c1>.r2>.c1>.box>.bd>.n{
+    font-size: 0.47rem;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0rem;
+    color: #fcd300;
+}
+
+/* 区细分图 */
+.container>.c1>.r2>.c2{padding: .1rem .25rem}
+.container>.c1>.r2>.c2>.box{}
+.bdi2{
+    border-image: url(../img/box2.png) 49% fill / auto
+}

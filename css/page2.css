@@ -1,0 +1,9 @@
+/* grid */
+.container>.c1{width: 20%;}
+.container>.c2{width: 80%;}
+
+.container>.c2>.r1{height: 60%;}
+.container>.c2>.r2{height: 40%;}
+
+.container>.c2>.r2>.c1{width: 60%;}
+.container>.c2>.r2>.c2{width: 40%;}

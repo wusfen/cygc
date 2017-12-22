@@ -1,0 +1,15 @@
+{
+    "error": 0,
+    "msg": "success",
+    "data":[
+        {
+            "id": 1,
+            "name": "name",
+            "sex": "男",
+            "no": "123456123412341234",
+            "avatar": "img/m1.png",
+            "type": "吸毒人员",
+            "note": "特别备注",
+        }
+    ]
+}

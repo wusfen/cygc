@@ -1,0 +1,24 @@
+{
+    "error": 0,
+    "msg": "success",
+    "data":[
+        {
+            "personId": 1,
+            "x": 20,
+            "y": 300,
+            "src": "video/path",
+        },
+        {
+            "personId": 1,
+            "x": 110,
+            "y": 510,
+            "src": "video/path",
+        },
+        {
+            "personId": 1,
+            "x": 220,
+            "y": 420,
+            "src": "video/path",
+        },
+    ]
+}

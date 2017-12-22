@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>光启超级智能追踪系统.</title>
+    <script>
+    addEventListener('resize', function f() {
+        var html = document.documentElement,
+            width = html.clientWidth,
+            height = html.clientHeight;
+        html.style.fontSize = (width > height * 1920 / 1080 ? height * 1920 / 1080 : width) * 100 / 1920 + 'px';
+        return f
+    }());
+    </script>
+    <style type="text/css">
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-size: 62.5%;
+    }
+
+    .bd {
+        border: solid 1px;
+    }
+
+    .bg {
+        background-color: rgba(0, 0, 0, .8) !important;
+    }
+
+    .fx {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+    }
+
+    .fxdc {
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -ms-flex-direction: column;
+        -o-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .aic {
+        -ms-align-items: center;
+        align-items: center;
+    }
+
+    .jcc {
+        justify-content: center;
+    }
+
+    .fxmc {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        -ms-align-items: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    html {
+        font-family: "Microsoft Yahei";
+    }
+
+    html {
+        height: 100%;
+        background: #172450 url(img/bg.png) center;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+
+    .header {
+        width: 5.84rem;
+        height: 0.77rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: url(img/header.png) top no-repeat;
+        -webkit-background-size: contain;
+        background-size: contain;
+    }
+
+    .header {
+        transition: .3s;
+        z-index: 9;
+    }
+
+    .header:hover {
+        opacity: 0;
+    }
+
+    .container {
+        width: 19.2rem;
+        height: 10.8rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .container .backdraw {
+        width: 100%;
+        height: 100%;
+        background: url(img/p2.l.png) center;
+        -webkit-background-size: contain;
+        background-size: contain;
+        opacity: .6;
+    }
+
+    .pos {
+        width: 0rem;
+        height: 0rem;
+        position: absolute;
+        top: 0rem;
+        left: 0rem;
+        right: 0rem;
+        bottom: 0rem;
+    }
+
+    .Lo {
+        width: 3.1rem;
+        height: 9.55rem;
+        position: absolute;
+        top: 1.06rem;
+        left: 0.21rem;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Lo .ls {
+        position: absolute;
+        top: 0.95rem;
+        left: 0.25rem;
+        right: 0rem;
+        bottom: 0rem;
+        overflow: auto;
+    }
+
+    .Lo .ls .it {
+        overflow: auto;
+        margin-bottom: 0.4rem;
+        cursor: pointer;
+    }
+
+    .Lo .ls .it .i {
+        float: left;
+        width: 1.14rem;
+        height: 1.14rem;
+        border-radius: 99em;
+        overflow: hidden;
+    }
+
+    .Lo .ls .it .t {
+        float: left;
+        line-height: 1.14rem;
+        margin-left: 0.27rem;
+        font-size: 0.3rem;
+        color: #eeecdb;
+    }
+
+    .Lo .ls .it.active .i {
+        width: 1.14rem;
+        height: 1.14rem;
+        background-color: #0b1130;
+        border: solid 0.03rem rgba(249, 76, 53, 0.93);
+    }
+
+    .Lo .ls .it.active .t {
+        color: #fd4d45;
+    }
+
+    .Mo {
+        width: 15.25rem;
+        height: 5.39rem;
+        position: absolute;
+        top: 1.24rem;
+        left: 3.63rem;
+        right: 0;
+        bottom: 0;
+        background: url(img/m2.png) center;
+        -webkit-background-size: contain;
+        background-size: contain;
+    }
+
+    .Mo canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+    .Mo .ls {}
+
+    .Mo .ls .it {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        margin-left: -5px;
+        margin-top: -5px;
+        background: #f60;
+        border-radius: 9em;
+        cursor: pointer;
+        transition: .25s;
+    }
+    .Mo .ls .it:hover {
+        transform: scale(1.5);
+    }
+
+    .Vo {
+        width: 8.09rem;
+        height: 3.26rem;
+        position: absolute;
+        top: 7.19rem;
+        left: 3.69rem;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Io {
+        width: 6.83rem;
+        height: 3.6rem;
+        position: absolute;
+        top: 7.02rem;
+        left: 12.15rem;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Io .ls {
+        height: 100%;
+        padding: 0.1625rem 0
+    }
+
+    .Io .ls .it {
+        height: 20%;
+        font-size: 0.24rem;
+        color: #fefeff;
+        padding-left: .22rem;
+        line-height: 0.65rem;
+    }
+
+    .Io .i {
+        width: 2.09rem;
+        height: 2.3rem;
+        position: absolute;
+        top: 0.66rem;
+        left: 4.43rem;
+        background-color: rgba(123, 123, 123, 0.21);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="header"></div>
+    <div id="vue" class="container">
+        <div class="backdraw"></div>
+        <!-- 人员列表 -->
+        <div class="Lo">
+            <div class="ls">
+                <div v-for="item in table.person" class="it" :class="{active:selected.person==item}" @click="selected.person=item">
+                    <img class="i" :src="item.avatar">
+                    <div class="t">{{item.name}}</div>
+                </div>
+            </div>
+        </div>
+        <!-- map -->
+        <div class="Mo">
+            <canvas id="canvas" width="1525" height="539"></canvas>
+            <div class="ls">
+                <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it"></span>
+            </div>
+        </div>
+        <!-- 视频 -->
+        <div class="Vo"></div>
+        <!-- 人员信息 -->
+        <div v-if="selected.person" class="Io">
+            <div class="ls">
+                <div class="it">姓　　名：{{selected.person.name}}</div>
+                <div class="it">性　　别：{{selected.person.sex}}</div>
+                <div class="it">身份证号：{{selected.person.no}}</div>
+                <div class="it">监控类型：{{selected.person.type}}</div>
+                <div class="it">备注信息：{{selected.person.note}}</div>
+            </div>
+            <img class="i" :src="selected.person.avatar">
+        </div>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script src="lib/proto.js"></script>
+    <script src="lib/$.js"></script>
+    <script src="lib/ajax.js"></script>
+    <script src="lib/echarts.min.js"></script>
+    <script>
+    var vue = new Vue({
+        el: '#vue',
+        data: {
+            table: {
+                person: [],
+                track: [],
+            },
+            selected: {
+                person: {},
+                track: {},
+            }
+        },
+        methods: {
+            rem: function(x) {
+                return x / 100 + 'rem'
+            },
+            personLoad: function() {
+                ajax({
+                    url: 'data/person.json',
+                    success: function(res) {
+                        vue.table.person = res.data
+                    }
+                })
+            },
+            trackLoad: function() {
+                ajax({
+                    url: 'data/track.json',
+                    success: function(res) {
+                        vue.table.track = res.data
+
+                        // draw
+                        vue.trackDraw()
+                    }
+                })
+            },
+            trackDraw: function() {
+                // context.moveTo(item.x, item.y)
+                context.strokeStyle = '#f00'
+                vue.table.track.each(function(item) {
+                    context.lineTo(item.x, item.y)
+                    context.stroke()
+                })
+            }
+        },
+        mounted: function() {
+            vue = this
+
+            vue.personLoad()
+            vue.trackLoad()
+        }
+    })
+
+    var canvas = document.getElementById('canvas')
+    var context = canvas.getContext('2d')
+    </script>
+</body>
+
+</html>
