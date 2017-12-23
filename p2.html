@@ -50,6 +50,11 @@
         }
     }
 
+    .lv0 {
+        background-color: rgba(77, 247, 117, 0.17);
+        border: solid 1px #07c333;
+    }
+
     .lv1 {
         background-color: rgba(77, 247, 117, 0.17);
         border: solid 1px #07c333;
@@ -300,6 +305,12 @@
         transition: .25s;
     }
 
+    .Mo .ts .it.active {
+        background: #ff1313;
+        box-shadow: 2px 3px 8px #790800;
+        border: solid 1px #fff;
+    }
+
     .Mo .ts .it:hover {
         transform: scale(1.5);
     }
@@ -384,7 +395,7 @@
         <!-- 人员列表 -->
         <div class="Lo">
             <div class="ls">
-                <div v-for="item in table.person" class="it" :class="{active:selected.person==item}" @click="personSelect(item)">
+                <div v-for="item in table.person" class="it" :class="{active:selected.person==item}" @click="selected.person=item">
                     <img class="i" :src="item.avatar">
                     <div class="t">{{item.name}}</div>
                 </div>
@@ -395,6 +406,7 @@
             <canvas id="canvas" width="1525" height="539"></canvas>
             <div class="ls">
                 <div v-for="item in table.area" class="it fxmc fxdc" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
+                        lv0: table.count.get({name:item.name}).level==0,
                         lv1: table.count.get({name:item.name}).level==1,
                         lv2: table.count.get({name:item.name}).level==2,
                         lv3: table.count.get({name:item.name}).level==3,
@@ -405,7 +417,9 @@
                 </div>
             </div>
             <div class="ts">
-                <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it" @click="selected.track=item"></span>
+                <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it" :class="{active:selected.track==item}" @click="selected.track=item">
+                    
+                </span>
                 <div v-if="!Object.isEmpty(table.track)" class="p" :style="{top:rem(table.track.last().y),left:rem(table.track.last().x)}" @click="selected.track=table.track.last()">
                     <img class="i" :src="selected.person.avatar">
                     <span class="d"></span>
@@ -436,7 +450,7 @@
     <script src="lib/echarts.min.js"></script>
     <script>
     ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
-    ajax.useLocal = true
+    // ajax.useLocal = true
 
     var vue = new Vue({
         el: '#vue',
@@ -453,8 +467,11 @@
             }
         },
         watch: {
-            'selected.track': function() {
-
+            'table.person': function () {
+                vue.selected.person = vue.table.person.first()
+            },
+            'selected.person': function() {
+                vue.trackLoad()
             }
         },
         methods: {
@@ -491,16 +508,12 @@
                     }
                 })
             },
-            personSelect: function(item) {
-                vue.selected.person = item
-                vue.trackLoad(item.no);
-            },
-            trackLoad: function(identity_id) {
+            trackLoad: function() {
                 ajax({
                     local: 'data/track.json',
                     url: 'trajectory/listPersonTrajectory.do',
                     data: {
-                        identity_id: identity_id
+                        identity_id: vue.selected.person.no
                     },
                     success: function(res) {
                         var data = res.data || []
@@ -518,10 +531,14 @@
                 context.clearRect(0, 0, context.canvas.width, context.canvas.height) // clear
                 context.strokeStyle = '#f00'
 
-                list.each(function(item, i) {
-                    context[!i ? 'moveTo' : 'lineTo'](item.x, item.y)
-                    context.stroke()
-                })
+                context.beginPath()
+                context.moveTo(list.first().x, list.first().y)
+                for (var i = 0; i < list.length; i++) {
+                    var item = list[i]
+                    context.lineTo(item.x, item.y)
+                }
+                context.stroke()
+                context.closePath()
             }
         },
         mounted: function() {

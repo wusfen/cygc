@@ -21,9 +21,21 @@
         "level": 3,
     },
     {
-    	"areaId": 4,
+        "areaId": 4,
         "name": "D区",
         "value": 456,
         "level": 4,
+    },
+    {
+        "areaId": 5,
+        "name": "B1区",
+        "value": 100,
+        "level": 4,
+    },
+    {
+        "areaId": 6,
+        "name": "B2区",
+        "value": 200,
+        "level": 3,
     }]
 }

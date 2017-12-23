@@ -33,5 +33,24 @@
         "y": 233,
         "width": 182,
         "height": 300,
+    },
+
+    {
+        "id": 5,
+        "name": "B1区",
+        "x": 175,
+        "y": 233,
+        "width": 170,
+        "height": 150,
+        "parentId": 2,
+    },
+    {
+        "id": 6,
+        "name": "B2区",
+        "x": 200,
+        "y": 333,
+        "width": 170,
+        "height": 150,
+        "parentId": 2,
     }]
 }
