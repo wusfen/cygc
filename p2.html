@@ -27,6 +27,31 @@
     }());
     </script>
     <style type="text/css">
+@media screen  and (min-width:768px) {
+::-webkit-scrollbar {width:14px;height:14px}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb{border-radius:999px;border:5px solid transparent}
+::-webkit-scrollbar-track{box-shadow:1px 1px 5px rgba(0,0,0,.05) inset}
+::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0,0,0,.2) inset}
+::-webkit-scrollbar-corner{background:transparent}
+}
+    .lv1{
+    background-color: #0098ff;
+    border: solid 0.01rem #0098ff;
+    }
+    .lv2{
+    background-color: #fcd300;
+    border: solid 0.01rem #fcd300;
+    }
+    .lv3{
+    background-color: #ff6700;
+    border: solid 0.01rem #ff6700;
+    }
+    .lv4{
+    background-color: #ff0000;
+    border: solid 0.01rem #e13721;
+    }
+    
     * {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -125,12 +150,6 @@
         margin: auto;
     }
 
-    /**/
-    .lv1{}
-    .lv2{}
-    .lv3{}
-    .lv4{}
-
     .container .backdraw {
         width: 100%;
         height: 100%;
@@ -215,14 +234,33 @@
         background-size: contain;
     }
 
+    .Mo .ls {
+        /*height: 2.92rem;*/
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .Mo .ls .it {
+        float: left;
+        width: 10%;
+        height: 2.92rem;
+        /*background-color: rgba(244, 53, 40, 0.2);*/
+        /*border: solid 0.01rem #e13721;*/
+        position: absolute;
+        top: 2.33rem;
+    }
+
     .Mo canvas {
         width: 100%;
         height: 100%;
     }
 
-    .Mo .ls {}
+    .Mo .ts {}
 
-    .Mo .ls .it {
+    .Mo .ts .it {
         position: absolute;
         width: 10px;
         height: 10px;
@@ -233,9 +271,30 @@
         cursor: pointer;
         transition: .25s;
     }
-    .Mo .ls .it:hover {
+    .Mo .ts .it:hover {
         transform: scale(1.5);
     }
+
+    .Mo .ts .p{
+        position: absolute;
+        top: 100px;
+        width: 0;
+        height: 0;
+        cursor: pointer;
+    }
+    .Mo .ts .p .i{
+        width: 1.14rem;
+        height: 1.14rem;
+        border-radius: 99em;
+        overflow: hidden;
+        /*border: solid 1px #f00;*/
+        box-shadow: 0px 0px 10px #ff0000;
+        position: absolute;
+        bottom: 100%;
+        left: -.57rem;
+        margin-bottom: .25rem;
+    }
+    .Mo .ts .p .d{}
 
     .Vo {
         width: 8.09rem;
@@ -304,7 +363,23 @@
         <div class="Mo">
             <canvas id="canvas" width="1525" height="539"></canvas>
             <div class="ls">
+                <div v-for="item in table.area" class="it fxmc fxdc" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}"
+                    :class="{
+                        lv1: table.count.get({name:item.name}).level==1,
+                        lv2: table.count.get({name:item.name}).level==2,
+                        lv3: table.count.get({name:item.name}).level==3,
+                        lv4: table.count.get({name:item.name}).level==4,
+                    }"
+                >
+                    <span>{{table.count.get({name:item.name}).value}}</span>
+                </div>
+            </div>
+            <div class="ts">
                 <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it" @click="selected.track=item"></span>
+                <div v-if="!Object.isEmpty(table.track)" class="p" :style="{top:rem(table.track.last().y),left:rem(table.track.last().x)}" @click="selected.track=table.track.last()">
+                    <img class="i" :src="selected.person.avatar">
+                    <span class="d"></span>
+                </div>
             </div>
         </div>
         <!-- 视频 -->
@@ -337,6 +412,8 @@
         el: '#vue',
         data: {
             table: {
+                area: [],
+                count: [],
                 person: [],
                 track: [],
             },
@@ -354,12 +431,33 @@
             rem: function(x) {
                 return x / 100 + 'rem'
             },
+            areaLoad: function() {
+                ajax({
+                    local: 'data/area.json',
+                    url: 'trajectory/listArea.do',
+                    success: function(res) {
+                        var data = res.data || []
+                        vue.table.area = data
+                    }
+                })
+            },
+            countLoad: function() {
+                ajax({
+                    local: 'data/count.json',
+                    url: 'trajectory/countArea.do',
+                    success: function(res) {
+                        var data = res.data || []
+                        vue.table.count = data
+                    }
+                })
+            },
             personLoad: function() {
                 ajax({
                     local: 'data/person.json',
                     url: 'trajectory/listTargetInfo.do',
                     success: function(res) {
-                        vue.table.person = res.data
+                        var data = res.data || []
+                        vue.table.person = data
                     }
                 })
             },
@@ -375,7 +473,8 @@
                         identity_id: identity_id
                     },
                     success: function(res) {
-                        vue.table.track = res.data
+                        var data = res.data || []
+                        vue.table.track = data
 
                         // draw
                         vue.trackDraw()
@@ -398,6 +497,8 @@
         mounted: function() {
             vue = this
 
+            vue.areaLoad()
+            vue.countLoad()
             vue.personLoad()
         }
     })
