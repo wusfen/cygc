@@ -282,7 +282,7 @@
         <!-- 人员列表 -->
         <div class="Lo">
             <div class="ls">
-                <div v-for="item in table.person" class="it" :class="{active:selected.person==item}" @click="selected.person=item">
+                <div v-for="item in table.person" class="it" :class="{active:selected.person==item}" @click="selected.person=item;trackLoad(item.no)">
                     <img class="i" :src="item.avatar">
                     <div class="t">{{item.name}}</div>
                 </div>
@@ -313,8 +313,11 @@
     <script src="lib/proto.js"></script>
     <script src="lib/$.js"></script>
     <script src="lib/ajax.js"></script>
+    <script src="lib/jquery.js"></script>
     <script src="lib/echarts.min.js"></script>
     <script>
+    ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
+
     var vue = new Vue({
         el: '#vue',
         data: {
@@ -334,14 +337,21 @@
             personLoad: function() {
                 ajax({
                     url: 'data/person.json',
+                    url: 'trajectory/listTargetInfo.do',
                     success: function(res) {
                         vue.table.person = res.data
                     }
                 })
             },
-            trackLoad: function() {
-                ajax({
+            trackLoad: function(identity_id) {
+                $.ajax({
                     url: 'data/track.json',
+                    url: ajax.base + 'trajectory/listPersonTrajectory.do',
+                    data: {
+                        identity_id: identity_id
+                    },
+                    type: 'post',
+                    dataType: 'json',
                     success: function(res) {
                         vue.table.track = res.data
 

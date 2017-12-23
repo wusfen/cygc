@@ -152,7 +152,7 @@
 
     .Ao .ls .it {
         float: left;
-        width: 22%;
+        width: 10%;
         height: 100%;
         background-color: rgba(244, 53, 40, 0.2);
         border: solid 0.01rem #e13721;
@@ -323,9 +323,9 @@
         <!-- 实时人数 -->
         <div class="Ao">
             <div class="ls">
-                <div v-for="item in list" class="it fxmc fxdc">
+                <div v-for="item in table.area" class="it fxmc fxdc">
                     <div class="t">{{item.name}}</div>
-                    <div class="n">{{item.value}}</div>
+                    <div class="n">{{table.count.get({name:item.name}).value}}</div>
                 </div>
             </div>
         </div>
@@ -344,79 +344,43 @@
         <!-- 预测 -->
         <div class="R1 Ro">
             <div class="ls">
-                <div class="it fxmc">
-                    <div class="t">A区</div>
-                    <div class="n">9999</div>
-                </div>
-                <div class="it fxmc">
-                    <div class="t">A区</div>
-                    <div class="n">9999</div>
-                </div>
-                <div class="it fxmc">
-                    <div class="t">A区</div>
-                    <div class="n">9999</div>
+                <div v-for="item in table.forecast3.count" class="it fxmc">
+                    <div class="t">{{item.name}}</div>
+                    <div class="n">{{item.value}}</div>
                 </div>
             </div>
             <div class="msg">
-                <div class="it">
-                    <span class="dot"></span>
-                    <div class="txt">A区人数持续增加，请及时调控</div>
-                </div>
-                <div class="it">
-                    <span class="dot"></span>
-                    <div class="txt">A区人数持续增加，请及时调控</div>
+                <div v-for="item in table.forecast3.tip" class="it">
+                    <span class="dot">{{item.level}}</span>
+                    <div class="txt">{{item.msg}}</div>
                 </div>
             </div>
         </div>
         <div class="R2 Ro">
             <div class="ls">
-                <div class="it fxmc">
-                    <div class="t">A区</div>
-                    <div class="n">9999</div>
-                </div>
-                <div class="it fxmc">
-                    <div class="t">A区</div>
-                    <div class="n">9999</div>
-                </div>
-                <div class="it fxmc">
-                    <div class="t">A区</div>
-                    <div class="n">9999</div>
+                <div v-for="item in table.forecast5.count" class="it fxmc">
+                    <div class="t">{{item.name}}</div>
+                    <div class="n">{{item.value}}</div>
                 </div>
             </div>
             <div class="msg">
-                <div class="it">
-                    <span class="dot"></span>
-                    <div class="txt">A区人数持续增加，请及时调控</div>
-                </div>
-                <div class="it">
-                    <span class="dot"></span>
-                    <div class="txt">A区人数持续增加，请及时调控</div>
+                <div v-for="item in table.forecast5.tip" class="it">
+                    <span class="dot">{{item.level}}</span>
+                    <div class="txt">{{item.msg}}</div>
                 </div>
             </div>
         </div>
         <div class="R3 Ro">
             <div class="ls">
-                <div class="it fxmc">
-                    <div class="t">A区</div>
-                    <div class="n">9999</div>
-                </div>
-                <div class="it fxmc">
-                    <div class="t">A区</div>
-                    <div class="n">9999</div>
-                </div>
-                <div class="it fxmc">
-                    <div class="t">A区</div>
-                    <div class="n">9999</div>
+                <div v-for="item in table.forecast10.count" class="it fxmc">
+                    <div class="t">{{item.name}}</div>
+                    <div class="n">{{item.value}}</div>
                 </div>
             </div>
             <div class="msg">
-                <div class="it">
-                    <span class="dot"></span>
-                    <div class="txt">A区人数持续增加，请及时调控</div>
-                </div>
-                <div class="it">
-                    <span class="dot"></span>
-                    <div class="txt">A区人数持续增加，请及时调控</div>
+                <div v-for="item in table.forecast10.tip" class="it">
+                    <span class="dot">{{item.level}}</span>
+                    <div class="txt">{{item.msg}}</div>
                 </div>
             </div>
         </div>
@@ -425,23 +389,44 @@
     <script src="lib/proto.js"></script>
     <script src="lib/$.js"></script>
     <script src="lib/ajax.js"></script>
+    <script src="lib/jquery.js"></script>
     <script src="lib/echarts.min.js"></script>
     <script>
-    ajax.base = ''
+    ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
 
     var vue = new Vue({
         el: '#vue',
         data: {
             total: 0,
-            list: []
+            table:{
+                area: [],
+                count: [],
+                forecast3: {},
+                forecast5: {},
+                forecast10: {},
+            },
+            selected:{
+
+            }
         },
         methods: {
-            loadCount: function() {
+            areaLoad: function() {
                 ajax({
-                    url: 'data/count.json',
+                    url: 'data/area.json',
+                    url: 'trajectory/listArea.do',
                     success: function(res) {
                         var data = res.data || []
-                        vue.list = data
+                        vue.table.area = data
+                    }
+                })
+            },
+            countLoad: function() {
+                ajax({
+                    url: 'data/count.json',
+                    url: 'trajectory/countArea.do',
+                    success: function(res) {
+                        var data = res.data || []
+                        vue.table.count = data
 
                         vue.total = data.sum('value')
                         // chart
@@ -452,12 +437,29 @@
                         })
                     }
                 })
-            }
+            },
+            forecastLoad: function(m) {
+                $.ajax({
+                    url: 'data/forecast.json',
+                    url: 'http://10.4.91.85:8088'+'/labelling_platform/forecastJson/getFutureThreeMinutesAreaCount.do',
+                    data: {
+                        minutes: 3
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function(res) {
+                        var data = res.data || []
+                        vue.table.forecast3 = data
+                    }
+                })
+            },
         },
         mounted: function() {
             vue = this
 
-            vue.loadCount()
+            vue.areaLoad()
+            vue.countLoad()
+            vue.forecastLoad()
         }
     })
     </script>
