@@ -294,7 +294,7 @@
         <!-- 人员列表 -->
         <div class="Lo">
             <div class="ls">
-                <div v-for="item in table.person" class="it" :class="{active:selected.person==item}" @click="trackLoad(item.no);selected.person=item">
+                <div v-for="item in table.person" class="it" :class="{active:selected.person==item}" @click="personSelect(item)">
                     <img class="i" :src="item.avatar">
                     <div class="t">{{item.name}}</div>
                 </div>
@@ -304,13 +304,13 @@
         <div class="Mo">
             <canvas id="canvas" width="1525" height="539"></canvas>
             <div class="ls">
-                <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it"></span>
+                <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it" @click="selected.track=item"></span>
             </div>
         </div>
         <!-- 视频 -->
         <div class="Vo">
-            <video src="http://10.4.91.126:8080/123.mp4" controlsxxx autoplay loop></video>
-            <!-- <video src="ftp://uftp:uftp@10.4.91.233/mp/123.mp4" controls autoplay loop></video> -->
+            <!-- <video src="http://10.4.91.126:8080/123.mp4" controlsxxx autoplay loop></video> -->
+            <video id="video" :src="selected.track.src" controlsxxx autoplay loop></video>
         </div>
         <!-- 人员信息 -->
         <div v-if="selected.person" class="Io">
@@ -328,10 +328,10 @@
     <script src="lib/proto.js"></script>
     <script src="lib/$.js"></script>
     <script src="lib/ajax.js"></script>
-    <script src="lib/jquery.js"></script>
     <script src="lib/echarts.min.js"></script>
     <script>
     ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
+    ajax.useLocal = true
 
     var vue = new Vue({
         el: '#vue',
@@ -345,28 +345,35 @@
                 track: {},
             }
         },
+        watch:{
+            'selected.track': function () {
+                
+            }
+        },
         methods: {
             rem: function(x) {
                 return x / 100 + 'rem'
             },
             personLoad: function() {
                 ajax({
-                    url: 'data/person.json',
+                    local: 'data/person.json',
                     url: 'trajectory/listTargetInfo.do',
                     success: function(res) {
                         vue.table.person = res.data
                     }
                 })
             },
+            personSelect: function (item) {
+                vue.selected.person = item
+                vue.trackLoad(item.no);
+            },
             trackLoad: function(identity_id) {
-                $.ajax({
-                    url: 'data/track.json',
-                    url: ajax.base + 'trajectory/listPersonTrajectory.do',
+                ajax({
+                    local: 'data/track.json',
+                    url: 'trajectory/listPersonTrajectory.do',
                     data: {
                         identity_id: identity_id
                     },
-                    type: 'post',
-                    dataType: 'json',
                     success: function(res) {
                         vue.table.track = res.data
 
@@ -397,6 +404,7 @@
 
     var canvas = document.getElementById('canvas')
     var context = canvas.getContext('2d')
+    var video = document.getElementById('video')
     </script>
 </body>
 

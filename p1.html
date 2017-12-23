@@ -388,9 +388,9 @@
         <!-- 预测 -->
         <div class="R1 Ro">
             <div class="ls">
-                <div v-for="item in table.forecast3.count" class="it fxmc">
+                <div v-for="item in table.area" class="it fxmc" :style="{width:areaPercent(item)}">
                     <div class="t">{{item.name}}</div>
-                    <div class="n">{{item.value}}</div>
+                    <div class="n">{{areaForecastCount(item, 3)}}</div>
                 </div>
             </div>
             <div class="msg">
@@ -405,9 +405,9 @@
         </div>
         <div class="R2 Ro">
             <div class="ls">
-                <div v-for="item in table.forecast5.count" class="it fxmc">
+                <div v-for="item in table.area" class="it fxmc" :style="{width:areaPercent(item)}">
                     <div class="t">{{item.name}}</div>
-                    <div class="n">{{item.value}}</div>
+                    <div class="n">{{areaForecastCount(item, 5)}}</div>
                 </div>
             </div>
             <div class="msg">
@@ -422,9 +422,9 @@
         </div>
         <div class="R3 Ro">
             <div class="ls">
-                <div v-for="item in table.forecast10.count" class="it fxmc">
+                <div v-for="item in table.area" class="it fxmc" :style="{width:areaPercent(item)}">
                     <div class="t">{{item.name}}</div>
-                    <div class="n">{{item.value}}</div>
+                    <div class="n">{{areaForecastCount(item, 10)}}</div>
                 </div>
             </div>
             <div class="msg">
@@ -446,6 +446,7 @@
     <script src="lib/echarts.min.js"></script>
     <script>
     ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
+    // ajax.useLocal = true
 
     var vue = new Vue({
         el: '#vue',
@@ -454,9 +455,18 @@
             table:{
                 area: [],
                 count: [],
-                forecast3: {},
-                forecast5: {},
-                forecast10: {},
+                forecast3: {
+                    count:[],
+                    tip:[],
+                },
+                forecast5: {
+                    count:[],
+                    tip:[],
+                },
+                forecast10: {
+                    count:[],
+                    tip:[],
+                },
             },
             selected:{
 
@@ -465,7 +475,7 @@
         methods: {
             areaLoad: function() {
                 ajax({
-                    url: 'data/area.json',
+                    local: 'data/area.json',
                     url: 'trajectory/listArea.do',
                     success: function(res) {
                         var data = res.data || []
@@ -473,9 +483,12 @@
                     }
                 })
             },
+            areaPercent: function (item) {
+                return item.width/vue.table.area.sum('width')*100+'%'
+            },
             countLoad: function() {
                 ajax({
-                    url: 'data/count.json',
+                    local: 'data/count.json',
                     url: 'trajectory/countArea.do',
                     success: function(res) {
                         var data = res.data || []
@@ -493,7 +506,7 @@
             },
             forecastLoad: function(m) {
                 $.ajax({
-                    url: 'data/forecast.json',
+                    local: 'data/forecast.json',
                     url: 'http://10.4.91.99:8087'+'/labelling_platform/forecastJson/getFutureMinutesAreaCount.do',
                     data: {
                         minutes: m
@@ -506,6 +519,9 @@
                     }
                 })
             },
+            areaForecastCount: function (area, minutes) {
+                return vue.table['forecast'+minutes].count.get({name:area.name}).value
+            }
         },
         mounted: function() {
             vue = this

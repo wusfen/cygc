@@ -4,8 +4,17 @@
     "data":[
         {
             "id": 1,
-            "name": "name",
+            "name": "xxx",
             "sex": "男",
+            "no": "123456123412341234",
+            "avatar": "img/m1.png",
+            "type": "吸毒人员",
+            "note": "特别备注",
+        },
+        {
+            "id": 2,
+            "name": "yyy",
+            "sex": "女",
             "no": "123456123412341234",
             "avatar": "img/m1.png",
             "type": "吸毒人员",
