@@ -27,6 +27,48 @@
     }());
     </script>
     <style type="text/css">
+@media screen  and (min-width:768px) {
+::-webkit-scrollbar {width:14px;height:14px}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb{border-radius:999px;border:5px solid transparent}
+::-webkit-scrollbar-track{box-shadow:1px 1px 5px rgba(0,0,0,.05) inset}
+::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0,0,0,.2) inset}
+::-webkit-scrollbar-corner{background:transparent}
+}
+
+    .lv1{
+    background-color: #0098ff;
+    border: solid 0.01rem #0098ff;
+    }
+    .lv2{
+    background-color: #fcd300;
+    border: solid 0.01rem #fcd300;
+    }
+    .lv3{
+    background-color: #ff6700;
+    border: solid 0.01rem #ff6700;
+    }
+    .lv4{
+    background-color: #ff0000;
+    border: solid 0.01rem #e13721;
+    }
+    .lv1{
+    background-color: #0098ff;
+    border: solid 0.01rem #0098ff;
+    }
+    .dot.lv2{
+    background-color: #fcd300;
+    border: solid 0.01rem #fcd300;
+    }
+    .dot.lv3{
+    background-color: #ff6700;
+    border: solid 0.01rem #ff6700;
+    }
+    .dot.lv4{
+    background-color: #ff0000;
+    border: solid 0.01rem #e13721;
+    }
+
     * {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -289,6 +331,7 @@
     .Ro .msg {
         width: 5.15rem;
         height: 0.7rem;
+        overflow: auto;
         position: absolute;
         top: 2.5rem;
         left: 0.35rem;
@@ -305,7 +348,7 @@
         border-radius: 9em;
         width: 0.1rem;
         height: 0.1rem;
-        background-color: #ff0000;
+        /*background-color: #ff0000;*/
     }
 
     .Ro .msg .it .txt {
@@ -351,7 +394,10 @@
             </div>
             <div class="msg">
                 <div v-for="item in table.forecast3.tip" class="it">
-                    <span class="dot">{{item.level}}</span>
+                    <span class="dot lv1"></span>
+                    <span class="dot lv2"></span>
+                    <span class="dot lv3"></span>
+                    <span class="dot lv4"></span>
                     <div class="txt">{{item.msg}}</div>
                 </div>
             </div>
@@ -365,7 +411,7 @@
             </div>
             <div class="msg">
                 <div v-for="item in table.forecast5.tip" class="it">
-                    <span class="dot">{{item.level}}</span>
+                    <span class="dot"></span>
                     <div class="txt">{{item.msg}}</div>
                 </div>
             </div>
@@ -379,7 +425,7 @@
             </div>
             <div class="msg">
                 <div v-for="item in table.forecast10.tip" class="it">
-                    <span class="dot">{{item.level}}</span>
+                    <span class="dot"></span>
                     <div class="txt">{{item.msg}}</div>
                 </div>
             </div>
@@ -441,15 +487,15 @@
             forecastLoad: function(m) {
                 $.ajax({
                     url: 'data/forecast.json',
-                    url: 'http://10.4.91.99:8087'+'/labelling_platform/forecastJson/getFutureThreeMinutesAreaCount.do',
+                    url: 'http://10.4.91.99:8087'+'/labelling_platform/forecastJson/getFutureMinutesAreaCount.do',
                     data: {
-                        minutes: 3
+                        minutes: m
                     },
                     type: 'post',
                     dataType: 'json',
                     success: function(res) {
                         var data = res.data || []
-                        vue.table.forecast3 = data
+                        vue.table['forecast'+m] = data
                     }
                 })
             },
@@ -459,7 +505,9 @@
 
             vue.areaLoad()
             vue.countLoad()
-            vue.forecastLoad()
+            vue.forecastLoad(3)
+            vue.forecastLoad(5)
+            vue.forecastLoad(10)
         }
     })
     </script>
