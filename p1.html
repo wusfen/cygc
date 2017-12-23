@@ -334,6 +334,7 @@
         overflow: auto;
         position: absolute;
         top: 2.5rem;
+        top: 2.4rem;
         left: 0.35rem;
         right: 0;
         bottom: 0;
@@ -394,10 +395,10 @@
             </div>
             <div class="msg">
                 <div v-for="item in table.forecast3.tip" class="it">
-                    <span class="dot lv1"></span>
-                    <span class="dot lv2"></span>
-                    <span class="dot lv3"></span>
-                    <span class="dot lv4"></span>
+                    <span v-if="item.level==1" class="dot lv1"></span>
+                    <span v-if="item.level==2" class="dot lv2"></span>
+                    <span v-if="item.level==3" class="dot lv3"></span>
+                    <span v-if="item.level==4" class="dot lv4"></span>
                     <div class="txt">{{item.msg}}</div>
                 </div>
             </div>
@@ -411,7 +412,10 @@
             </div>
             <div class="msg">
                 <div v-for="item in table.forecast5.tip" class="it">
-                    <span class="dot"></span>
+                    <span v-if="item.level==1" class="dot lv1"></span>
+                    <span v-if="item.level==2" class="dot lv2"></span>
+                    <span v-if="item.level==3" class="dot lv3"></span>
+                    <span v-if="item.level==4" class="dot lv4"></span>
                     <div class="txt">{{item.msg}}</div>
                 </div>
             </div>
@@ -425,7 +429,10 @@
             </div>
             <div class="msg">
                 <div v-for="item in table.forecast10.tip" class="it">
-                    <span class="dot"></span>
+                    <span v-if="item.level==1" class="dot lv1"></span>
+                    <span v-if="item.level==2" class="dot lv2"></span>
+                    <span v-if="item.level==3" class="dot lv3"></span>
+                    <span v-if="item.level==4" class="dot lv4"></span>
                     <div class="txt">{{item.msg}}</div>
                 </div>
             </div>
