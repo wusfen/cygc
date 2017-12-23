@@ -36,20 +36,20 @@
 ::-webkit-scrollbar-corner{background:transparent}
 }
     .lv1{
-    background-color: #0098ff;
-    border: solid 0.01rem #0098ff;
+    background-color: rgba(77, 247, 117, 0.17);
+    border: solid 1px #07c333;
     }
     .lv2{
-    background-color: #fcd300;
-    border: solid 0.01rem #fcd300;
+    background-color: rgba(77, 247, 117, 0.17);
+    border: solid 1px #07c333;
     }
     .lv3{
-    background-color: #ff6700;
-    border: solid 0.01rem #ff6700;
+    background-color: rgba(245, 243, 69, 0.17);
+    border: solid 1px #d8cb00;
     }
     .lv4{
-    background-color: #ff0000;
-    border: solid 0.01rem #e13721;
+    background-color: rgba(244, 52, 39, 0.17);
+    border: solid 1px #e13721;
     }
     
     * {
@@ -253,6 +253,16 @@
         top: 2.33rem;
     }
 
+    .Mo .ls .it .t {
+        font-size: 0.2rem;
+        color: #2b7b7a;
+    }
+
+    .Mo .ls .it .n {
+        font-size: 0.48rem;
+        color: #2b7b7a;
+    }
+
     .Mo canvas {
         width: 100%;
         height: 100%;
@@ -371,7 +381,8 @@
                         lv4: table.count.get({name:item.name}).level==4,
                     }"
                 >
-                    <span>{{table.count.get({name:item.name}).value}}</span>
+                    <div class="t">{{item.name}}</div>
+                    <!-- <div class="n">{{table.count.get({name:item.name}).value}}</div> -->
                 </div>
             </div>
             <div class="ts">

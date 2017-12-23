@@ -13,5 +13,17 @@
         "name": "B区",
         "value": 456,
         "level": 2,
+    },
+    {
+    	"areaId": 3,
+        "name": "C区",
+        "value": 456,
+        "level": 3,
+    },
+    {
+    	"areaId": 4,
+        "name": "D区",
+        "value": 456,
+        "level": 4,
     }]
 }
