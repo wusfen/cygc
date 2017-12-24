@@ -421,11 +421,11 @@ html {
 
 .Ro .msg {
     width: 5.15rem;
-    height: 0.7rem;
+    height: 1rem;
     overflow: auto;
     position: absolute;
     top: 2.5rem;
-    top: 2.4rem;
+    top: 2rem;
     left: 0.35rem;
     right: 0;
     bottom: 0;
