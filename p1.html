@@ -34,11 +34,11 @@
     <div id="vue" class="container">
         <div class="backdraw"></div>
         <!-- 实时人数 -->
-        <div class="Mo Mox">
+        <div class="Mo p1">
             <canvas id="canvas" width="1525" height="539"></canvas>
             <div class="map"></div>
             <div class="ls">
-                <div v-for="item in table.area" class="it fxmc fxdc" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
+                <div v-for="item in table.area" class="it fxmc fxdc area curp" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
                         lv0: table.count.get({name:item.name}).level==0,
                         lv1: table.count.get({name:item.name}).level==1,
                         lv2: table.count.get({name:item.name}).level==2,
@@ -53,19 +53,22 @@
         </div>
         <!-- 区细分图 -->
         <div class="So">
-            <div class="Mo" :style="subAreaPosition">
-                <canvas id="canvas" width="1525" height="539"></canvas>
-                <div class="map"></div>
-                <div class="ls">
-                    <div v-for="item in table.subArea" class="it fxmc" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
-                            lv0: table.subCount.get({name:item.name}).level==0,
-                            lv1: table.subCount.get({name:item.name}).level==1,
-                            lv2: table.subCount.get({name:item.name}).level==2,
-                            lv3: table.subCount.get({name:item.name}).level==3,
-                            lv4: table.subCount.get({name:item.name}).level==4,
-                        }">
-                        <div class="t">{{item.name}}: </div>
-                        <div class="n" style="font-size:.2rem">{{table.subCount.get({name:item.name}).value}}</div>
+            <span class="st">{{selected.area.name}}细分图</span>
+            <div class="slice">
+                <div class="Mo" :style="subAreaPosition">
+                    <!-- <canvas id="canvas" width="1525" height="539"></canvas> -->
+                    <div class="map"></div>
+                    <div class="ls">
+                        <div v-for="item in table.subArea" class="it fxmc area" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
+                                lv0: table.subCount.get({name:item.name}).level==0,
+                                lv1: table.subCount.get({name:item.name}).level==1,
+                                lv2: table.subCount.get({name:item.name}).level==2,
+                                lv3: table.subCount.get({name:item.name}).level==3,
+                                lv4: table.subCount.get({name:item.name}).level==4,
+                            }">
+                            <div class="t">{{item.name}}: </div>
+                            <div class="n" style="font-size:.2rem">{{table.subCount.get({name:item.name}).value}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -158,143 +161,65 @@
     <script src="lib/ajax.js"></script>
     <script src="lib/jquery.js"></script>
     <script src="lib/echarts.min.js"></script>
+    <script src="js/global.js"></script>
     <script>
-    ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
-    // ajax.useLocal = true
-
-    var vue = new Vue({
-        el: '#vue',
-        data: {
-            total: 0,
-            table: {
-                area: [],
-                subArea: [],
-                count: [],
-                subCount: [],
-                forecast3: {
-                    count: [],
-                    tip: [],
-                },
-                forecast5: {
-                    count: [],
-                    tip: [],
-                },
-                forecast10: {
-                    count: [],
-                    tip: [],
-                },
-            },
-            selected: {
-                area: {}
-            },
-            subAreaPosition: {}
-        },
-        watch: {
-            'table.count': function() {
-                var data = vue.table.count
-                vue.total = data.sum('value')
-                // chart
-                chart.setOption({
-                    series: {
-                        data: data
-                    }
-                })
-            },
-            'selected.area': function () {
-                vue.subAreaLoad(vue.selected.area)
-                vue.subCountLoad(vue.selected.area)
-            },
-            'table.subArea': function () {
-                var x = vue.table.subArea.min('x').x
-                var y = vue.table.subArea.min('y').y
-                vue.subAreaPosition = {
-                    left: vue.rem(-x + 100),
-                    top: vue.rem(-y + 130),
+        vue.$watch('table.count', function() {
+            var data = vue.table.count
+            vue.total = data.sum('value')
+            // chart
+            chart.setOption({
+                series: {
+                    data: data
                 }
-            }
-        },
-        methods: {
-            rem: function(x) {
-                return x / 100 + 'rem'
-            },
-            areaLoad: function() {
-                ajax({
-                    local: 'data/area.json',
-                    url: 'trajectory/listArea.do',
-                    success: function(res) {
-                        var data = res.data || []
-                        vue.table.area = data
-                    }
-                })
-            },
-            subAreaLoad: function (area) {
-                ajax({
-                    local: 'data/area.json',
-                    url: 'trajectory/listArea.do',
-                    data: {
-                        area_id: area.id
-                    },
-                    success: function(res) {
-                        var data = res.data || []
-                        vue.table.subArea = data
-                    }
-                })
-            },
-            areaPercent: function(item) {
-                return item.width / vue.table.area.sum('width') * 100 + '%'
-            },
-            countLoad: function() {
-                ajax({
-                    local: 'data/count.json',
-                    url: 'trajectory/countArea.do',
-                    success: function(res) {
-                        var data = res.data || []
-                        vue.table.count = data
-                    }
-                })
-            },
-            subCountLoad: function(area) {
-                ajax({
-                    local: 'data/count.json',
-                    url: 'trajectory/countArea.do',
-                    data: {
-                        area_id: area.id
-                    },
-                    success: function(res) {
-                        var data = res.data || []
-                        vue.table.subCount = data
-                    }
-                })
-            },
-            forecastLoad: function(m) {
-                $.ajax({
-                    local: 'data/forecast.json',
-                    url: ajax.base+'/forecastJson/getFutureMinutesAreaCount.do',
-                    data: {
-                        minutes: m
-                    },
-                    type: 'post',
-                    dataType: 'json',
-                    success: function(res) {
-                        var data = res.data || []
-                        vue.table['forecast' + m] = data
-                    }
-                })
-            },
-            areaForecastCount: function(area, minutes) {
-                return vue.table['forecast' + minutes].count.get({ name: area.name }).value
-            }
-        },
-        mounted: function() {
-            vue = this
+            })
+        })
+        vue.$watch('selected.area', function () {
+            vue.subAreaLoad(vue.selected.area)
+            vue.subCountLoad(vue.selected.area)
+        })
+        // 子图定位
+        vue.$watch('table.subArea', function () {
+            var mapWidth = 1525
+            var mapHeight = 539
+            var viewWidth = 616
+            var viewHeight = 361
 
-            vue.areaLoad()
-            vue.countLoad()
-            vue.forecastLoad(3)
-            vue.forecastLoad(5)
-            vue.forecastLoad(10)
-        }
-    })
+            var points = [] // 所有子区域的四个角点
+            vue.table.subArea.each(function (item) {
+                points.push({x:item.x, y:item.y}) //left top
+                points.push({x:item.x+item.width, y:item.y}) //top righ
+                points.push({x:item.x+item.width, y:item.y+item.height}) //righ bottom
+                points.push({x:item.x, y:item.y+item.height}) //bottom left
+            })
+
+            // 所有子区域的中位点
+            var center = {
+                x: (points.min('x').x + points.max('x').x)/2,
+                y: (points.min('y').y + points.max('y').y)/2
+            }
+
+            // 中位点计算地图相对视口坐标
+            var left = -center.x + viewWidth/2
+            var top = -center.y + viewHeight/2
+
+            if (left>0) {left=0}
+            if (top>0) {top=0}
+            if (-left+viewWidth>mapWidth) {left=-(mapWidth-viewWidth)}
+            if (-top+viewHeight>mapHeight) {top=-(mapHeight-viewHeight)}
+
+            console.log(points, left, top)
+
+            vue.subAreaPosition = {
+                left: vue.rem(left),
+                top: vue.rem(top),
+            }
+        })
+
+        vue.areaLoad()
+        vue.countLoad()
+        vue.forecastLoad(3)
+        vue.forecastLoad(5)
+        vue.forecastLoad(10)
     </script>
     <script>
     var chart = echarts.init(document.getElementById('chart'));
@@ -327,7 +252,7 @@
                             color: '#fff',
                         },
                         formatter: function(obj) {
-                            return obj.name + ' ' + obj.percent + '%'
+                            return obj.name + ' ' + obj.value + ''
                         }
                     },
                     labelLine: { //标签的视觉引导线样式
@@ -343,7 +268,7 @@
                         show: true,
                         position: 'center',
                         textStyle: {
-                            fontSize: '10',
+                            fontSize: '14',
                             fontWeight: 'bold'
                         },
                     }

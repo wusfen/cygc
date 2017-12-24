@@ -26,153 +26,8 @@
         return f
     }());
     </script>
+    <link rel="stylesheet" type="text/css" href="css/global.css">
     <style type="text/css">
-    @media screen and (min-width:768px) {
-        ::-webkit-scrollbar {
-            width: 14px;
-            height: 14px
-        }
-        ::-webkit-scrollbar-track,
-        ::-webkit-scrollbar-thumb {
-            border-radius: 999px;
-            border: 5px solid transparent
-        }
-        ::-webkit-scrollbar-track {
-            box-shadow: 1px 1px 5px rgba(0, 0, 0, .05) inset
-        }
-        ::-webkit-scrollbar-thumb {
-            min-height: 20px;
-            background-clip: content-box;
-            box-shadow: 0 0 0 5px rgba(0, 0, 0, .2) inset
-        }
-        ::-webkit-scrollbar-corner {
-            background: transparent
-        }
-    }
-
-    .lv0 {
-        background-color: rgba(77, 247, 117, 0.17);
-        border: solid 1px #07c333;
-    }
-
-    .lv1 {
-        background-color: rgba(77, 247, 117, 0.17);
-        border: solid 1px #07c333;
-    }
-
-    .lv2 {
-        background-color: rgba(77, 247, 117, 0.17);
-        border: solid 1px #07c333;
-    }
-
-    .lv3 {
-        background-color: rgba(245, 243, 69, 0.17);
-        border: solid 1px #d8cb00;
-    }
-
-    .lv4 {
-        background-color: rgba(244, 52, 39, 0.17);
-        border: solid 1px #e13721;
-    }
-
-    * {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-size: 62.5%;
-    }
-
-    .bd {
-        border: solid 1px;
-    }
-
-    .bg {
-        background-color: rgba(0, 0, 0, .8) !important;
-    }
-
-    .fx {
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flex;
-        display: -o-flex;
-        display: flex;
-    }
-
-    .fxdc {
-        -webkit-flex-direction: column;
-        -moz-flex-direction: column;
-        -ms-flex-direction: column;
-        -o-flex-direction: column;
-        flex-direction: column;
-    }
-
-    .aic {
-        -ms-align-items: center;
-        align-items: center;
-    }
-
-    .jcc {
-        justify-content: center;
-    }
-
-    .fxmc {
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flex;
-        display: -o-flex;
-        display: flex;
-        -ms-align-items: center;
-        align-items: center;
-        justify-content: center;
-    }
-
-    html {
-        font-family: "Microsoft Yahei";
-    }
-
-    html {
-        height: 100%;
-        background: #172450 url(img/bg.png) center;
-        -webkit-background-size: cover;
-        background-size: cover;
-    }
-
-    .header {
-        width: 5.84rem;
-        height: 0.77rem;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        background: url(img/header.png) top no-repeat;
-        -webkit-background-size: contain;
-        background-size: contain;
-    }
-
-    .header {
-        transition: .3s;
-        z-index: 9;
-    }
-
-    .header:hover {
-        opacity: 0;
-    }
-
-    .container {
-        width: 19.2rem;
-        height: 10.8rem;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-    }
-
     .container .backdraw {
         width: 100%;
         height: 100%;
@@ -182,209 +37,6 @@
         opacity: .6;
     }
 
-    .pos {
-        width: 0rem;
-        height: 0rem;
-        position: absolute;
-        top: 0rem;
-        left: 0rem;
-        right: 0rem;
-        bottom: 0rem;
-    }
-
-    .Lo {
-        width: 3.1rem;
-        height: 9.55rem;
-        position: absolute;
-        top: 1.06rem;
-        left: 0.21rem;
-        right: 0;
-        bottom: 0;
-    }
-
-    .Lo .ls {
-        position: absolute;
-        top: 0.95rem;
-        left: 0.25rem;
-        right: 0rem;
-        bottom: 0rem;
-        overflow: auto;
-    }
-
-    .Lo .ls .it {
-        overflow: auto;
-        margin-bottom: 0.4rem;
-        cursor: pointer;
-    }
-
-    .Lo .ls .it .i {
-        float: left;
-        width: 1.14rem;
-        height: 1.14rem;
-        border-radius: 99em;
-        overflow: hidden;
-    }
-
-    .Lo .ls .it .t {
-        float: left;
-        line-height: 1.14rem;
-        margin-left: 0.27rem;
-        font-size: 0.3rem;
-        color: #eeecdb;
-    }
-
-    .Lo .ls .it.active .i {
-        width: 1.14rem;
-        height: 1.14rem;
-        background-color: #0b1130;
-        border: solid 0.03rem rgba(249, 76, 53, 0.93);
-    }
-
-    .Lo .ls .it.active .t {
-        color: #fd4d45;
-    }
-
-    .Mo {
-        width: 15.25rem;
-        height: 5.39rem;
-        position: absolute;
-        top: 1.24rem;
-        left: 3.63rem;
-        right: 0;
-        bottom: 0;
-        background: url(img/m2.png) center;
-        -webkit-background-size: contain;
-        background-size: contain;
-    }
-
-    .Mo .ls {
-        /*height: 2.92rem;*/
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-
-    .Mo .ls .it {
-        float: left;
-        width: 10%;
-        height: 2.92rem;
-        /*background-color: rgba(244, 53, 40, 0.2);*/
-        /*border: solid 0.01rem #e13721;*/
-        position: absolute;
-        top: 2.33rem;
-    }
-
-    .Mo .ls .it .t {
-        font-size: 0.2rem;
-        color: #2b7b7a;
-    }
-
-    .Mo .ls .it .n {
-        font-size: 0.48rem;
-        color: #2b7b7a;
-    }
-
-    .Mo canvas {
-        width: 100%;
-        height: 100%;
-    }
-
-    .Mo .ts {}
-
-    .Mo .ts .it {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        margin-left: -5px;
-        margin-top: -5px;
-        background: #f60;
-        border-radius: 9em;
-        cursor: pointer;
-        transition: .25s;
-    }
-
-    .Mo .ts .it.active {
-        background: #ff1313;
-        box-shadow: 2px 3px 8px #790800;
-        border: solid 1px #fff;
-    }
-
-    .Mo .ts .it:hover {
-        transform: scale(1.5);
-    }
-
-    .Mo .ts .p {
-        position: absolute;
-        top: 100px;
-        width: 0;
-        height: 0;
-        cursor: pointer;
-    }
-
-    .Mo .ts .p .i {
-        width: 1.14rem;
-        height: 1.14rem;
-        border-radius: 99em;
-        overflow: hidden;
-        /*border: solid 1px #f00;*/
-        box-shadow: 0px 0px 10px #ff0000;
-        position: absolute;
-        bottom: 100%;
-        left: -.57rem;
-        margin-bottom: .25rem;
-    }
-
-    .Mo .ts .p .d {}
-
-    .Vo {
-        width: 8.09rem;
-        height: 3.26rem;
-        position: absolute;
-        top: 7.19rem;
-        left: 3.69rem;
-        right: 0;
-        bottom: 0;
-        background: #000;
-    }
-
-    .Vo video {
-        width: 100%;
-        height: 100%;
-    }
-
-    .Io {
-        width: 6.83rem;
-        height: 3.6rem;
-        position: absolute;
-        top: 7.02rem;
-        left: 12.15rem;
-        right: 0;
-        bottom: 0;
-    }
-
-    .Io .ls {
-        height: 100%;
-        padding: 0.1625rem 0
-    }
-
-    .Io .ls .it {
-        height: 20%;
-        font-size: 0.24rem;
-        color: #fefeff;
-        padding-left: .22rem;
-        line-height: 0.65rem;
-    }
-
-    .Io .i {
-        width: 2.09rem;
-        height: 2.3rem;
-        position: absolute;
-        top: 0.66rem;
-        left: 4.43rem;
-        background-color: rgba(123, 123, 123, 0.21);
-    }
     </style>
 </head>
 
@@ -405,7 +57,7 @@
         <div class="Mo">
             <canvas id="canvas" width="1525" height="539"></canvas>
             <div class="ls">
-                <div v-for="item in table.area" class="it fxmc fxdc" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
+                <div v-for="item in table.area" class="it fxmc fxdc area" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
                         lv0: table.count.get({name:item.name}).level==0,
                         lv1: table.count.get({name:item.name}).level==1,
                         lv2: table.count.get({name:item.name}).level==2,
@@ -447,112 +99,26 @@
     <script src="lib/proto.js"></script>
     <script src="lib/$.js"></script>
     <script src="lib/ajax.js"></script>
+    <script src="lib/jquery.js"></script>
     <script src="lib/echarts.min.js"></script>
+    <script src="js/global.js"></script>
     <script>
-    ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
-    // ajax.useLocal = true
+        vue.$watch('selected.area', function () {
+            vue.subAreaLoad(vue.selected.area)
+            vue.subCountLoad(vue.selected.area)
+        })
 
-    var vue = new Vue({
-        el: '#vue',
-        data: {
-            table: {
-                area: [],
-                count: [],
-                person: [],
-                track: [],
-            },
-            selected: {
-                person: {},
-                track: {},
-            }
-        },
-        watch: {
-            'table.person': function () {
-                vue.selected.person = vue.table.person.first()
-            },
-            'selected.person': function() {
-                vue.trackLoad()
-            }
-        },
-        methods: {
-            rem: function(x) {
-                return x / 100 + 'rem'
-            },
-            areaLoad: function() {
-                ajax({
-                    local: 'data/area.json',
-                    url: 'trajectory/listArea.do',
-                    success: function(res) {
-                        var data = res.data || []
-                        vue.table.area = data
-                    }
-                })
-            },
-            countLoad: function() {
-                ajax({
-                    local: 'data/count.json',
-                    url: 'trajectory/countArea.do',
-                    success: function(res) {
-                        var data = res.data || []
-                        vue.table.count = data
-                    }
-                })
-            },
-            personLoad: function() {
-                ajax({
-                    local: 'data/person.json',
-                    url: 'trajectory/listTargetInfo.do',
-                    success: function(res) {
-                        var data = res.data || []
-                        vue.table.person = data
-                    }
-                })
-            },
-            trackLoad: function() {
-                ajax({
-                    local: 'data/track.json',
-                    url: 'trajectory/listPersonTrajectory.do',
-                    data: {
-                        identity_id: vue.selected.person.no
-                    },
-                    success: function(res) {
-                        var data = res.data || []
-                        vue.table.track = data
+        vue.$watch('table.person', function () {
+            vue.selected.person = vue.table.person.first()
+        })
+        vue.$watch('selected.person', function() {
+            vue.trackLoad()
+        })
 
-                        // draw
-                        vue.trackDraw()
-                    }
-                })
-            },
-            trackDraw: function() {
-                // context.moveTo(item.x, item.y)
-                var list = vue.table.track
+        vue.areaLoad()
+        vue.countLoad()
 
-                context.clearRect(0, 0, context.canvas.width, context.canvas.height) // clear
-                context.strokeStyle = '#f00'
-
-                context.beginPath()
-                context.moveTo(list.first().x, list.first().y)
-                for (var i = 0; i < list.length; i++) {
-                    var item = list[i]
-                    context.lineTo(item.x, item.y)
-                }
-                context.stroke()
-                context.closePath()
-            }
-        },
-        mounted: function() {
-            vue = this
-
-            vue.areaLoad()
-            vue.countLoad()
-            vue.personLoad()
-        }
-    })
-
-    var canvas = document.getElementById('canvas')
-    var context = canvas.getContext('2d')
-    var video = document.getElementById('video')
+        vue.personLoad()
     </script>
 </body>
 

@@ -1,52 +1,3 @@
-.area{
-
-}
-
-.lv0 {
-    background-color: rgba(77, 247, 117, 0.17);
-    border: solid 1px #07c333;
-}
-
-.lv1 {
-    background-color: rgba(77, 247, 117, 0.17);
-    border: solid 1px #07c333;
-}
-
-.lv2 {
-    background-color: rgba(77, 247, 117, 0.17);
-    border: solid 1px #07c333;
-}
-
-.lv3 {
-    background-color: rgba(245, 243, 69, 0.17);
-    border: solid 1px #d8cb00;
-}
-
-.lv4 {
-    background-color: rgba(244, 52, 39, 0.17);
-    border: solid 1px #e13721;
-}
-
-.dot.lv1 {
-    background-color: #0098ff;
-    border: solid 0.01rem #0098ff;
-}
-
-.dot.lv2 {
-    background-color: #fcd300;
-    border: solid 0.01rem #fcd300;
-}
-
-.dot.lv3 {
-    background-color: #ff6700;
-    border: solid 0.01rem #ff6700;
-}
-
-.dot.lv4 {
-    background-color: #ff0000;
-    border: solid 0.01rem #e13721;
-}
-
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -57,12 +8,20 @@ body {
     font-size: 62.5%;
 }
 
+html {
+    font-family: "Microsoft Yahei";
+}
+
 .bd {
     border: solid 1px;
 }
 
 .bg {
     background-color: rgba(0, 0, 0, .8) !important;
+}
+
+.curp{
+    cursor: pointer;
 }
 
 .fx {
@@ -101,9 +60,7 @@ body {
     justify-content: center;
 }
 
-html {
-    font-family: "Microsoft Yahei";
-}
+/* frame */
 
 html {
     height: 100%;
@@ -151,19 +108,10 @@ html {
     background: url(../img/p1.l.png) center;
     -webkit-background-size: contain;
     background-size: contain;
-    opacity: .6;
+    /*opacity: .6;*/
 }
 
-.map{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 15.25rem;
-    height: 5.39rem;
-    background: url(../img/m2.png) center;
-    -webkit-background-size: contain;
-    background-size: contain;
-}
+/*地图*/
 
 .Mo {
     width: 15.25rem;
@@ -178,7 +126,7 @@ html {
     background-size: contain;
 }
 
-.Mox {
+.Mo.p1 {
     position: absolute;
     top: 1.18rem;
     left: 0.36rem;
@@ -188,31 +136,69 @@ html {
     transform-origin: left;
 }
 
-.Mo .ls {
-    /*height: 2.92rem;*/
+.Mo canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.map{
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 15.25rem;
+    height: 5.39rem;
+    background: url(../img/m2.png) center;
+    -webkit-background-size: contain;
+    background-size: contain;
 }
 
-.Mo .ls .it {
+.area{
     float: left;
     width: 10%;
     height: 2.92rem;
-    /*background-color: rgba(244, 53, 40, 0.2);*/
-    /*border: solid 0.01rem #e13721;*/
-    border: solid 1px #888;
+    background-color: rgba(140, 140, 140, 0.2);
+    border: solid 1px #696969;
     position: absolute;
     top: 2.33rem;
     text-shadow: 4px 3px 4px #fff;
 }
 
-.Mo .ls .it.active {
-    border: solid 2px #333;
-    z-index: 1;
+.area.active{
+    box-shadow: inset 2px 2px 9px 0px rgb(109, 109, 109);
 }
+
+.lv0 {
+    background-color: rgba(77, 247, 117, 0.17);
+    border: solid 1px #07c333;
+}
+
+.lv1 {
+    background-color: rgba(19, 146, 255, 0.28);
+    border: solid 1px #1392ff;
+    background-color: rgba(77, 247, 117, 0.17);
+    border: solid 1px #07c333;
+}
+
+.lv2 {
+    background-color: rgba(245, 243, 69, 0.17);
+    border: solid 1px #d8cb00;
+}
+
+.lv3 {
+    background-color: rgba(255, 165, 0, 0.35);
+    border: solid 1px #ffa500;
+}
+
+.lv4 {
+    background-color: rgba(244, 52, 39, 0.17);
+    border: solid 1px #e13721;
+}
+
+.Mo .ls {
+    /*height: 2.92rem;*/
+}
+
+.Mo .ls .it {}
 
 .Mo .ls .it .t {
     font-size: 0.2rem;
@@ -223,6 +209,66 @@ html {
     font-size: 0.48rem;
     color: #2b7b7a;
 }
+
+/*轨迹*/
+
+.Mo .ts {}
+
+.Mo .ts .it {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    margin-top: -5px;
+    background: #f60;
+    border-radius: 9em;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.Mo .ts .it.active {
+    background: #ff1313;
+    box-shadow: 2px 3px 8px #790800;
+    border: solid 1px #fff;
+    transform: scale(2);
+}
+
+.Mo .ts .it:hover {
+    transform: scale(1.5);
+}
+
+.Mo .ts .p {
+    position: absolute;
+    top: 100px;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+}
+
+.Mo .ts .p .i {
+    width: 1.14rem;
+    height: 1.14rem;
+    border-radius: 99em;
+    overflow: hidden;
+    /*border: solid 1px #f00;*/
+    box-shadow: 0px 0px 10px #ff0000;
+    position: absolute;
+    bottom: .15rem;
+    left: -.57rem;
+    margin-bottom: .25rem;
+}
+
+.Mo .ts .p .d {
+    border: solid .15rem #0af0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    left: -.15rem;
+    border-top-color: #f00;
+}
+
+/*环图*/
 
 .Co {
     width: 5.77rem;
@@ -260,6 +306,8 @@ html {
     bottom: 0;
 }
 
+/*子图*/
+
 .So {
     width: 6.16rem;
     height: 3.61rem;
@@ -268,15 +316,41 @@ html {
     left: 6.46rem;
     right: 0;
     bottom: 0;
+}
+
+.So .st{
+    position: absolute;
+    top: 0.74rem;
+    right: 100%;
+    margin-right: .33rem;
+    font-size: .222rem;
+    color: #1bf2ef;
+    width: .23rem;
+    height: 1.75rem;
+    background: #0a1935;
+    text-align: center;
+    margin-top: -.02rem;
+    padding-top: .02rem;
+    height: 1.8rem;
+}
+
+.So .slice{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     overflow: hidden;
 }
 
-.So .Mo {
+.So .slice .Mo {
     position: absolute;
     top: -2rem;
     left: 0;
     transition: .3s;
 }
+
+/*预测*/
 
 .R1 {
     position: absolute;
@@ -359,8 +433,6 @@ html {
 
 .Ro .msg .it {
     line-height: 0;
-    float: left;
-    margin-right: 12px;
 }
 
 .Ro .msg .it .dot {
@@ -377,7 +449,113 @@ html {
     font-size: 0.14rem;
 }
 
+/*人员列表*/
 
+.Lo {
+    width: 3.1rem;
+    height: 9.55rem;
+    position: absolute;
+    top: 1.06rem;
+    left: 0.21rem;
+    right: 0;
+    bottom: 0;
+}
+
+.Lo .ls {
+    position: absolute;
+    top: 0.95rem;
+    left: 0.25rem;
+    right: 0rem;
+    bottom: 0rem;
+    overflow: auto;
+}
+
+.Lo .ls .it {
+    overflow: auto;
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+}
+
+.Lo .ls .it .i {
+    float: left;
+    width: 1.14rem;
+    height: 1.14rem;
+    border-radius: 99em;
+    overflow: hidden;
+}
+
+.Lo .ls .it .t {
+    float: left;
+    line-height: 1.14rem;
+    margin-left: 0.27rem;
+    font-size: 0.3rem;
+    color: #eeecdb;
+}
+
+.Lo .ls .it.active .i {
+    width: 1.14rem;
+    height: 1.14rem;
+    background-color: #0b1130;
+    border: solid 0.03rem rgba(249, 76, 53, 0.93);
+}
+
+.Lo .ls .it.active .t {
+    color: #fd4d45;
+}
+
+/*视频*/
+
+.Vo {
+    width: 8.09rem;
+    height: 3.26rem;
+    position: absolute;
+    top: 7.19rem;
+    left: 3.69rem;
+    right: 0;
+    bottom: 0;
+    background: #000;
+}
+
+.Vo video {
+    width: 100%;
+    height: 100%;
+}
+
+/*身份*/
+
+.Io {
+    width: 6.83rem;
+    height: 3.6rem;
+    position: absolute;
+    top: 7.02rem;
+    left: 12.15rem;
+    right: 0;
+    bottom: 0;
+}
+
+.Io .ls {
+    height: 100%;
+    padding: 0.1625rem 0
+}
+
+.Io .ls .it {
+    height: 20%;
+    font-size: 0.24rem;
+    color: #fefeff;
+    padding-left: .22rem;
+    line-height: 0.65rem;
+}
+
+.Io .i {
+    width: 2.09rem;
+    height: 2.3rem;
+    position: absolute;
+    top: 0.66rem;
+    left: 4.43rem;
+    background-color: rgba(123, 123, 123, 0.21);
+}
+
+/**/
 
 @media screen and (min-width:768px) {
     ::-webkit-scrollbar {
