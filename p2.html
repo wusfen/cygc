@@ -80,8 +80,12 @@
         </div>
         <!-- 视频 -->
         <div class="Vo">
+            <div class="vt">监控人员-{{selected.track.deviceName}}</div>
             <!-- <video src="http://10.4.91.126:8080/123.mp4" controlsxxx autoplay loop></video> -->
-            <video id="video" :src="selected.track.src" controlsxxx autoplay loop></video>
+            <!-- <video id="video" :src="selected.track.src" controlsxxx autoplay loop></video> -->
+            <video>
+                <source src="ftp://uftp:uftp@10.4.91.233/mp/123.mp4" type="video/mp4"></source>
+            </video>
         </div>
         <!-- 人员信息 -->
         <div v-if="selected.person" class="Io">
@@ -117,8 +121,11 @@
 
         vue.areaLoad()
         vue.countLoad()
-
         vue.personLoad()
+        setInterval(function () {
+            vue.countLoad()
+            vue.personLoad()
+        }, 30000)
     </script>
 </body>
 

@@ -220,6 +220,12 @@
         vue.forecastLoad(3)
         vue.forecastLoad(5)
         vue.forecastLoad(10)
+        setInterval(function () {
+            vue.countLoad()
+            vue.forecastLoad(3)
+            vue.forecastLoad(5)
+            vue.forecastLoad(10)
+        }, 30000)
     </script>
     <script>
     var chart = echarts.init(document.getElementById('chart'));

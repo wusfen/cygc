@@ -1,5 +1,6 @@
 
     ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
+    ajax.base = 'http://10.4.91.2:8088/labelling_platform/'
     // ajax.useLocal = true
 
     var vue = new Vue({
@@ -150,7 +151,7 @@
                             context.closePath()
                         }
                         i<list.length-1 && loop(i+1)
-                    }, 100)
+                    }, 120)
                 }(0)
             }
         },
