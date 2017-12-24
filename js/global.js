@@ -37,7 +37,11 @@
         },
         methods: {
             videoFullscreen: function () {
-                video.webkitEnterFullscreen()
+                if (video.webkitExitFullscreen) {
+                    video.webkitDisplayingFullscreen?
+                    video.webkitExitFullscreen():
+                    video.webkitEnterFullscreen()
+                }
             },
             rem: function(x) {
                 return x / 100 + 'rem'
