@@ -1,7 +1,10 @@
 
-    ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
-    // ajax.base = 'http://10.4.91.2:8088/labelling_platform/'
-    // ajax.base = location.origin + '/labelling_platform/'
+    ajax.base = location.origin + '/labelling_platform/'
+    if (location.protocol=='file:') {
+        ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
+        ajax.base = 'http://10.4.91.91:8080/labelling_platform/'
+        // ajax.base = 'http://10.4.91.2:8088/labelling_platform/'
+    }
     // ajax.useLocal = true
 
     var vue = new Vue({

@@ -49,7 +49,7 @@ html {
     justify-content: center;
 }
 
-.fxmc {
+.fxcm {
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;
@@ -161,10 +161,12 @@ html {
     position: absolute;
     top: 2.33rem;
     text-shadow: 4px 3px 4px #fff;
+    text-shadow: 7px 3px 8px #909090;
+    transition: .3s;
 }
 
 .area.active{
-    box-shadow: inset 2px 2px 9px 0px rgb(109, 109, 109);
+    box-shadow: inset 2px 2px 9px 0px rgba(0, 0, 0, 0.61);
 }
 
 .lv0 {
@@ -400,6 +402,7 @@ html {
     /*background-color: rgba(77, 247, 117, 0.17);*/
     /*border: solid 0.01rem #07c333;*/
     position: relative;
+    top: auto;
     text-align: center;
 }
 
@@ -408,7 +411,7 @@ html {
     color: #eeeeee;
     line-height: 0.001rem;
     position: absolute;
-    top: 1.14rem;
+    top: .8rem;
     left: 0;
     right: 0;
     bottom: 0;

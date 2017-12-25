@@ -38,7 +38,7 @@
             <canvas id="canvas" width="1525" height="539"></canvas>
             <div class="map"></div>
             <div class="ls">
-                <div v-for="item in table.area" class="it fxmc fxdc area curp" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
+                <div v-for="item in table.area" class="it fxcm fxdc area curp" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
                         lv0: table.count.get({name:item.name}).level==0,
                         lv1: table.count.get({name:item.name}).level==1,
                         lv2: table.count.get({name:item.name}).level==2,
@@ -53,13 +53,13 @@
         </div>
         <!-- 区细分图 -->
         <div class="So">
-            <span class="st">{{selected.area.name}}细分图</span>
+            <span class="st fxcm">{{selected.area.name||'区域'}}细分图</span>
             <div class="slice">
                 <div class="Mo" :style="subAreaPosition">
                     <!-- <canvas id="canvas" width="1525" height="539"></canvas> -->
                     <div class="map"></div>
                     <div class="ls">
-                        <div v-for="item in table.subArea" class="it fxmc area" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
+                        <div v-for="item in table.subArea" class="it fxcm area" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
                                 lv0: table.subCount.get({name:item.name}).level==0,
                                 lv1: table.subCount.get({name:item.name}).level==1,
                                 lv2: table.subCount.get({name:item.name}).level==2,
@@ -84,13 +84,14 @@
         <!-- 预测 -->
         <div class="R1 Ro">
             <div class="ls">
-                <div v-for="item in table.area" class="it fxmc" :style="{width:areaPercent(item)}" :class="{
+                <div v-for="item in table.area" class="it fxcm area" :style="{width:areaPercent(item)}" :class="{
                     lv0: table.forecast3.count.get({name:item.name}).level==0,
                     lv1: table.forecast3.count.get({name:item.name}).level==1,
                     lv2: table.forecast3.count.get({name:item.name}).level==2,
                     lv3: table.forecast3.count.get({name:item.name}).level==3,
                     lv4: table.forecast3.count.get({name:item.name}).level==4,
-                }">
+                    active: selected.area==item
+                }" @click="selected.area=item">
                     <div class="t">{{item.name}}</div>
                     <div class="n">{{table.forecast3.count.get({name:item.name}).value}}</div>
                 </div>
@@ -108,13 +109,14 @@
         </div>
         <div class="R2 Ro">
             <div class="ls">
-                <div v-for="item in table.area" class="it fxmc" :style="{width:areaPercent(item)}" :class="{
+                <div v-for="item in table.area" class="it fxcm area" :style="{width:areaPercent(item)}" :class="{
                     lv0: table.forecast3.count.get({name:item.name}).level==0,
                     lv1: table.forecast3.count.get({name:item.name}).level==1,
                     lv2: table.forecast3.count.get({name:item.name}).level==2,
                     lv3: table.forecast3.count.get({name:item.name}).level==3,
                     lv4: table.forecast3.count.get({name:item.name}).level==4,
-                }">
+                    active: selected.area==item
+                }" @click="selected.area=item">
                     <div class="t">{{item.name}}</div>
                     <div class="n">{{table.forecast5.count.get({name:item.name}).value}}</div>
                 </div>
@@ -132,13 +134,14 @@
         </div>
         <div class="R3 Ro">
             <div class="ls">
-                <div v-for="item in table.area" class="it fxmc" :style="{width:areaPercent(item)}" :class="{
+                <div v-for="item in table.area" class="it fxcm area" :style="{width:areaPercent(item)}" :class="{
                     lv0: table.forecast3.count.get({name:item.name}).level==0,
                     lv1: table.forecast3.count.get({name:item.name}).level==1,
                     lv2: table.forecast3.count.get({name:item.name}).level==2,
                     lv3: table.forecast3.count.get({name:item.name}).level==3,
                     lv4: table.forecast3.count.get({name:item.name}).level==4,
-                }">
+                    active: selected.area==item
+                }" @click="selected.area=item">
                     <div class="t">{{item.name}}</div>
                     <div class="n">{{table.forecast10.count.get({name:item.name}).value}}</div>
                 </div>

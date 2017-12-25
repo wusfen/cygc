@@ -29,14 +29,8 @@
     <link rel="stylesheet" type="text/css" href="css/global.css">
     <style type="text/css">
     .container .backdraw {
-        width: 100%;
-        height: 100%;
-        background: url(img/p2.l.png) center;
-        -webkit-background-size: contain;
-        background-size: contain;
-        opacity: .6;
+        background-image: url(img/p2.l.png);
     }
-
     </style>
 </head>
 
@@ -47,7 +41,7 @@
         <!-- 人员列表 -->
         <div class="Lo">
             <div class="ls">
-                <div v-for="item in table.person" class="it" :class="{active:selected.person==item}" @click="selected.person=item">
+                <div v-for="item in table.person" class="it" :class="{active:selected.person.id==item.id}" @click="selected.person=item">
                     <img class="i" :src="item.avatar">
                     <div class="t">{{item.name}}</div>
                 </div>
@@ -57,7 +51,7 @@
         <div class="Mo">
             <canvas id="canvas" width="1525" height="539"></canvas>
             <div class="ls">
-                <div v-for="item in table.area" class="it fxmc fxdc area" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
+                <div v-for="item in table.area" class="it fxcm fxdc area" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
                         lv0: table.count.get({name:item.name}).level==0,
                         lv1: table.count.get({name:item.name}).level==1,
                         lv2: table.count.get({name:item.name}).level==2,
