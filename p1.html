@@ -166,69 +166,69 @@
     <script src="lib/echarts.min.js"></script>
     <script src="js/global.js"></script>
     <script>
-        vue.$watch('table.count', function() {
-            var data = vue.table.count
-            vue.total = data.sum('value')
-            // chart
-            chart.setOption({
-                series: {
-                    data: data
-                }
-            })
-        })
-        vue.$watch('selected.area', function () {
-            vue.subAreaLoad(vue.selected.area)
-            vue.subCountLoad(vue.selected.area)
-        })
-        // 子图定位
-        vue.$watch('table.subArea', function () {
-            var mapWidth = 1525
-            var mapHeight = 539
-            var viewWidth = 616
-            var viewHeight = 361
-
-            var points = [] // 所有子区域的四个角点
-            vue.table.subArea.each(function (item) {
-                points.push({x:item.x, y:item.y}) //left top
-                points.push({x:item.x+item.width, y:item.y}) //top righ
-                points.push({x:item.x+item.width, y:item.y+item.height}) //righ bottom
-                points.push({x:item.x, y:item.y+item.height}) //bottom left
-            })
-
-            // 所有子区域的中位点
-            var center = {
-                x: (points.min('x').x + points.max('x').x)/2,
-                y: (points.min('y').y + points.max('y').y)/2
-            }
-
-            // 中位点计算地图相对视口坐标
-            var left = -center.x + viewWidth/2
-            var top = -center.y + viewHeight/2
-
-            if (left>0) {left=0}
-            if (top>0) {top=0}
-            if (-left+viewWidth>mapWidth) {left=-(mapWidth-viewWidth)}
-            if (-top+viewHeight>mapHeight) {top=-(mapHeight-viewHeight)}
-
-            console.log(points, left, top)
-
-            vue.subAreaPosition = {
-                left: vue.rem(left),
-                top: vue.rem(top),
+    vue.$watch('table.count', function() {
+        var data = vue.table.count
+        vue.total = data.sum('value')
+        // chart
+        chart.setOption({
+            series: {
+                data: data
             }
         })
+    })
+    vue.$watch('selected.area', function() {
+        vue.subAreaLoad(vue.selected.area)
+        vue.subCountLoad(vue.selected.area)
+    })
+    // 子图定位
+    vue.$watch('table.subArea', function() {
+        var mapWidth = 1525
+        var mapHeight = 539
+        var viewWidth = 616
+        var viewHeight = 361
 
-        vue.areaLoad()
+        var points = [] // 所有子区域的四个角点
+        vue.table.subArea.each(function(item) {
+            points.push({ x: item.x, y: item.y }) //left top
+            points.push({ x: item.x + item.width, y: item.y }) //top righ
+            points.push({ x: item.x + item.width, y: item.y + item.height }) //righ bottom
+            points.push({ x: item.x, y: item.y + item.height }) //bottom left
+        })
+
+        // 所有子区域的中位点
+        var center = {
+            x: (points.min('x').x + points.max('x').x) / 2,
+            y: (points.min('y').y + points.max('y').y) / 2
+        }
+
+        // 中位点计算地图相对视口坐标
+        var left = -center.x + viewWidth / 2
+        var top = -center.y + viewHeight / 2
+
+        if (left > 0) { left = 0 }
+        if (top > 0) { top = 0 }
+        if (-left + viewWidth > mapWidth) { left = -(mapWidth - viewWidth) }
+        if (-top + viewHeight > mapHeight) { top = -(mapHeight - viewHeight) }
+
+        console.log(points, left, top)
+
+        vue.subAreaPosition = {
+            left: vue.rem(left),
+            top: vue.rem(top),
+        }
+    })
+
+    vue.areaLoad()
+    vue.countLoad()
+    vue.forecastLoad(3)
+    vue.forecastLoad(5)
+    vue.forecastLoad(10)
+    setInterval(function() {
         vue.countLoad()
         vue.forecastLoad(3)
         vue.forecastLoad(5)
         vue.forecastLoad(10)
-        setInterval(function () {
-            vue.countLoad()
-            vue.forecastLoad(3)
-            vue.forecastLoad(5)
-            vue.forecastLoad(10)
-        }, 30000)
+    }, 30000)
     </script>
     <script>
     var chart = echarts.init(document.getElementById('chart'));
