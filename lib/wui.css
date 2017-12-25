@@ -435,7 +435,7 @@ button{cursor:pointer}
 
 .input,
 .button,
-.group>span{vertical-align:middle;min-height:2.25em;padding:.25em .875em;border:solid 1px #ddd}
+.group>span{vertical-align:middle;min-height:2.25em;padding:.25em .875em;border:solid 1px #ddd;font-weight:normal}
 
 .input,
 .button{display:inline-block;border-radius:.25em}
