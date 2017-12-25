@@ -63,7 +63,11 @@
                 </div>
             </div>
             <div class="ts">
-                <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it" :class="{active:selected.track==item}" @click="selected.track=item">
+                <!-- type 000-wifi嗅探器,001-摄像头 -->
+                <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it" :class="{
+                    type001:item.type=='001',
+                    active:selected.track==item&&item.type=='001',
+                }" @click="selected.track=item">
                     
                 </span>
                 <div v-if="!Object.isEmpty(table.track)" class="p" :style="{top:rem(table.track.last().y),left:rem(table.track.last().x)}" @click="selected.track=table.track.last()">

@@ -222,10 +222,18 @@ html {
     height: 10px;
     margin-left: -5px;
     margin-top: -5px;
-    background: #f60;
+    background: #79bef5;
     border-radius: 9em;
-    cursor: pointer;
     transition: .25s;
+}
+
+.Mo .ts .it.type001 { /*摄像头*/
+    cursor: pointer;
+    background: #f60;
+}
+
+.Mo .ts .it.type001:hover {
+    transform: scale(1.5);
 }
 
 .Mo .ts .it.active {
@@ -233,10 +241,6 @@ html {
     box-shadow: 2px 3px 8px #790800;
     border: solid 1px #fff;
     transform: scale(2);
-}
-
-.Mo .ts .it:hover {
-    transform: scale(1.5);
 }
 
 .Mo .ts .p {
@@ -253,6 +257,7 @@ html {
     border-radius: 99em;
     overflow: hidden;
     /*border: solid 1px #f00;*/
+    background: #eee;
     box-shadow: 0px 0px 10px #ff0000;
     position: absolute;
     bottom: .15rem;
@@ -261,7 +266,7 @@ html {
 }
 
 .Mo .ts .p .d {
-    border: solid .15rem #0af0;
+    border: solid .15rem transparent;
     width: 0;
     height: 0;
     position: absolute;
@@ -484,6 +489,7 @@ html {
     width: 1.14rem;
     height: 1.14rem;
     border-radius: 99em;
+    background: #eee;
     overflow: hidden;
 }
 
@@ -498,7 +504,6 @@ html {
 .Lo .ls .it.active .i {
     width: 1.14rem;
     height: 1.14rem;
-    background-color: #0b1130;
     border: solid 0.03rem rgba(249, 76, 53, 0.93);
 }
 

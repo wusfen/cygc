@@ -26,29 +26,351 @@
         return f
     }());
     </script>
+    <link rel="stylesheet" type="text/css" href="lib/wui.css">
     <link rel="stylesheet" type="text/css" href="css/global.css">
     <style type="text/css">
-        a{
-            font-size: .26rem;
-            line-height: 1;
-            border: solid 1px #0af;
-            border-radius: .1rem;
-            margin: .1rem;
-            padding: .25rem .5rem;
-            text-decoration: none;
-            color: #0af;
-            box-shadow: 0px 0px .15rem #0af;
-        }
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        padding-top: 0.77rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .container>.row,
+    .container>.row>.col{
+        height: 100%;
+    }
+    .container>.row>.col>.list,
+    .container>.row>.col>.detail{
+        height: 100%;
+        overflow: auto;
+    }
+    /**/
+
+    .list {
+        background: #fff;
+        padding: .5em;
+    }
+
+    .list>ul {}
+
+    .list>ul>li {
+        padding: .5em;
+    }
+
+    .list>ul>li>span {
+        display: block;
+        padding: .5em;
+    }
+
+    .list>ul>li>ol {
+        padding-left: 2em;
+        list-style: none;
+        border-left: dashed 1px #888;
+    }
+
+    .list>ul>li>ol>li {}
+
+    .list>ul>li>ol>li>span {
+        display: block;
+        padding: .5em;
+    }
+
+    .detail {
+        background: #fff;
+        padding: .5em;
+    }
     </style>
 </head>
 
 <body>
     <div class="header"></div>
-    <div class="container fxcm">
-        <a href="p1.html">实时人数</a>
-        <a href="p2.html">人员监控</a>
-        <a href="p3.html">设备配置</a>
+    <div id="vue" class="container">
+        <div class="row">
+            <div class="col w6">
+                <!-- list -->
+                <div class="list">
+                    <ul>
+                        <li>
+                            <span>A区 X</span>
+                            <ol>
+                                <li>
+                                    <span>S1</span>
+                                </li>
+                                <li>
+                                    <b class="button">+ 添加设备</b>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            <span>A区 X</span>
+                            <ol>
+                                <li>
+                                    <span>S1</span>
+                                </li>
+                                <li>
+                                    <b class="button">+ 添加设备</b>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            <b class="button">+ 添加区域</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col w18">
+                <!-- detail -->
+                <div class="detail">
+                    <div class="form w480 mw">
+                        <div class="row">
+                            <div class="col" style="text-align:left">{</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"id":</div>
+                            <div class="col"><input class="input" v-model="d.id"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"file_path":</div>
+                            <div class="col"><input class="input" v-model="d.file_path"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"prototxt":</div>
+                            <div class="col"><input class="input" v-model="d.prototxt"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"thresh_head_y":</div>
+                            <div class="col"><input class="input" v-model="d.thresh_head_y"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"left_x":</div>
+                            <div class="col"><input class="input" v-model="d.left_x"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"device_type":</div>
+                            <div class="col"><input class="input" v-model="d.device_type"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"area_id":</div>
+                            <div class="col"><input class="input" v-model="d.area_id"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"device_name":</div>
+                            <div class="col"><input class="input" v-model="d.device_name"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"frame_interval":</div>
+                            <div class="col"><input class="input" v-model="d.frame_interval"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"direction_in_out":</div>
+                            <div class="col"><input class="input" v-model="d.direction_in_out"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"line1_a":</div>
+                            <div class="col"><input class="input" v-model="d.line1_a"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"caffemodel":</div>
+                            <div class="col"><input class="input" v-model="d.caffemodel"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"server_ip":</div>
+                            <div class="col"><input class="input" v-model="d.server_ip"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"y1":</div>
+                            <div class="col"><input class="input" v-model="d.y1"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"top_y":</div>
+                            <div class="col"><input class="input" v-model="d.top_y"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"y2":</div>
+                            <div class="col"><input class="input" v-model="d.y2"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"right_x":</div>
+                            <div class="col"><input class="input" v-model="d.right_x"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"y3":</div>
+                            <div class="col"><input class="input" v-model="d.y3"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"id":</div>
+                            <div class="col"><input class="input" v-model="d.id"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"y4":</div>
+                            <div class="col"><input class="input" v-model="d.y4"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"GPU_NO":</div>
+                            <div class="col"><input class="input" v-model="d.GPU_NO"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"device_id":</div>
+                            <div class="col"><input class="input" v-model="d.device_id"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"video_path":</div>
+                            <div class="col"><input class="input" v-model="d.video_path"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"bottom_y":</div>
+                            <div class="col"><input class="input" v-model="d.bottom_y"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"line1_b":</div>
+                            <div class="col"><input class="input" v-model="d.line1_b"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"line2_a":</div>
+                            <div class="col"><input class="input" v-model="d.line2_a"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"thresh_dis_y_100":</div>
+                            <div class="col"><input class="input" v-model="d.thresh_dis_y_100"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"line2_b":</div>
+                            <div class="col"><input class="input" v-model="d.line2_b"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"device_ip":</div>
+                            <div class="col"><input class="input" v-model="d.device_ip"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"thresh_dis_x_70":</div>
+                            <div class="col"><input class="input" v-model="d.thresh_dis_x_70"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"thresh_img_num":</div>
+                            <div class="col"><input class="input" v-model="d.thresh_img_num"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"x1":</div>
+                            <div class="col"><input class="input" v-model="d.x1"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"x2":</div>
+                            <div class="col"><input class="input" v-model="d.x2"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"x3":</div>
+                            <div class="col"><input class="input" v-model="d.x3"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">"x4":</div>
+                            <div class="col"><input class="input" v-model="d.x4"></div>
+                            <div class="col">,</div>
+                        </div>
+                        <div class="row">
+                            <div class="col" style="text-align:left">}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col">
+                                <b class="button primary" @click="deviceSave">保存</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="lib/vue.js"></script>
+    <script src="lib/proto.js"></script>
+    <script src="lib/$.js"></script>
+    <script src="lib/ajax.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/echarts.min.js"></script>
+    <!-- <script src="js/global.js"></script> -->
+    <script>
+
+    ajax.base = location.origin + '/labelling_platform/'
+    if (location.protocol=='file:') {
+        ajax.base = 'http://10.4.91.91:8080/labelling_platform/'
+        ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
+        // ajax.base = 'http://10.4.91.2:8088/labelling_platform/'
+    }
+    // ajax.useLocal = true
+
+    var vue = new Vue({
+        el: '#vue',
+        data: {
+            d:{},
+        },
+        methods: {
+            deviceLoad: function () {
+                $.ajax({
+                    url: ajax.base+'/deviceAction/addDevice.do',
+                    type: 'post',
+                    data: vue.d,
+                    dataType: 'json',
+                    success: function (res) {
+                        
+                    }
+                })
+            },
+            deviceSave:function () {
+                $.ajax({
+                    url: ajax.base+'/deviceAction/addDevice.do',
+                    type: 'post',
+                    data: vue.d,
+                    dataType: 'json',
+                    success: function (res) {
+                        
+                    }
+                })
+            }
+        },
+        mounted: function() {
+            vue = this
+        }
+    })
+    </script>
 </body>
 
 </html>
