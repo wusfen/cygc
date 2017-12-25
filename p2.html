@@ -41,7 +41,7 @@
         <!-- 人员列表 -->
         <div class="Lo">
             <div class="ls">
-                <div v-for="item in table.person" class="it" :class="{active:selected.person.id==item.id}" @click="selected.person=item">
+                <div v-for="item in table.person" class="it" :class="{active:selected.person.id==item.id}" @click="selected.person=item;trackLoad(true)">
                     <img class="i" :src="item.avatar">
                     <div class="t">{{item.name}}</div>
                 </div>
@@ -80,10 +80,11 @@
         <div class="Vo">
             <div class="vt">监控人员-{{selected.track.deviceName}}</div>
             <!-- <video src="http://10.4.91.126:8080/123.mp4" controlsxxx autoplay loop></video> -->
-            <video id="video" :src="selected.track.src" controlsxx autoplay loop @dblclick="videoFullscreen()"></video>
+            <!-- <video id="video" :src="selected.track.src" controlsxx autoplay loop @dblclick="videoFullscreen()"></video> -->
             <!-- <video>
                 <source src="ftp://uftp:uftp@10.4.91.233/mp/123.mp4" controls type="video/mp4"></source>
             </video> -->
+            <div id="player" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0"></div>
         </div>
         <!-- 人员信息 -->
         <div v-if="selected.person" class="Io">
@@ -113,9 +114,9 @@
         vue.$watch('table.person', function () {
             // vue.selected.person = vue.table.person.first()
         })
-        vue.$watch('selected.person', function() {
-            vue.trackLoad()
-        })
+        // vue.$watch('selected.person', function() {
+        //     vue.trackLoad()
+        // })
 
         vue.areaLoad()
         vue.countLoad()
@@ -123,7 +124,26 @@
         setInterval(function () {
             vue.countLoad()
             vue.personLoad()
+            vue.selected.person.id && vue.trackLoad()
         }, 30000)
+    </script>
+    <script type="text/javascript" src="lib/swfobject.min.js"></script>
+    <script type="text/javascript">
+        var flashvars = {
+            src: "http://10.4.91.126:8080/1.flv",
+            // src: "ftp://uftp:uftp@10.4.91.233/mp/123.mp4",
+        };
+        var params = {
+            allowFullScreen: true
+            , allowScriptAccess: "always"
+            , bgcolor: "#000000"
+        };
+        var attrs = {
+            name: "player"
+        };
+
+        // swfobject.embedSWF("lib/GrindPlayer.swf", "player", "854", "480", "10.2", null, flashvars, params, attrs);
+        // swfobject.embedSWF("lib/GrindPlayer.swf", "player", "600", "300", "10.2", null, flashvars, params, attrs);
     </script>
 </body>
 

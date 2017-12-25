@@ -126,7 +126,7 @@
                     }
                 })
             },
-            trackLoad: function() {
+            trackLoad: function(isFirst) {
                 ajax({
                     local: 'data/track.json',
                     url: 'trajectory/listPersonTrajectory.do',
@@ -138,32 +138,42 @@
                         vue.table.track = data
 
                         // draw
-                        vue.trackDraw()
+                        vue.trackDraw(isFirst)
                     }
                 })
             },
-            trackDraw: function() {
+            trackDraw: function(isFirst) {
                 clearTimeout(vue._t_td)
                 // context.moveTo(item.x, item.y)
                 var list = vue.table.track
 
                 context.clearRect(0, 0, context.canvas.width, context.canvas.height) // clear
-                context.strokeStyle = 'rgba(255,0,0, 1)'
+                context.strokeStyle = 'rgba(0,200,255, 1)'
 
-                !function loop(i) {
-                    vue._t_td = setTimeout(function () {
-                        var item = list[i]
-                        var next = list[i+1]
-                        if (item && next) {
-                            context.beginPath()
-                            context.moveTo(item.x, item.y)
-                            context.lineTo(next.x, next.y)
-                            context.stroke()
-                            context.closePath()
-                        }
-                        i<list.length-1 && loop(i+1)
-                    }, 120)
-                }(0)
+                if (isFirst) {
+                    !function loop(i) {
+                        vue._t_td = setTimeout(function () {
+                            draw(i)
+                            i<list.length-1 && loop(i+1)
+                        }, isFirst?120:0)
+                    }(0)
+                }else{
+                    for (var i = 0; i < list.length; i++) {
+                        draw(i)
+                    }
+                }
+
+                function draw(i) {
+                    var item = list[i]
+                    var next = list[i+1]
+                    if (item && next) {
+                        context.beginPath()
+                        context.moveTo(item.x, item.y)
+                        context.lineTo(next.x, next.y)
+                        context.stroke()
+                        context.closePath()
+                    }
+                }
             }
         },
         mounted: function() {
