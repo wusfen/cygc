@@ -447,7 +447,10 @@ html {
 }
 
 .Ro .msg .it {
-    line-height: 0;
+    line-height: 1.5;
+    font-size: 0.14rem;
+    position: relative;
+
 }
 
 .Ro .msg .it .dot {
@@ -456,12 +459,14 @@ html {
     width: 0.1rem;
     height: 0.1rem;
     /*background-color: #ff0000;*/
+    /*position: absolute;*/
+    top: .04rem;
 }
 
 .Ro .msg .it .txt {
-    display: inline-block;
+    display: inline;
     color: #ededed;
-    font-size: 0.14rem;
+    text-indent: 1em;
 }
 
 /*人员列表*/
