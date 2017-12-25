@@ -1,3 +1,10 @@
+[v-cloak]{
+    opacity: 0;
+}
+#vue{
+    transition: .3s;
+}
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

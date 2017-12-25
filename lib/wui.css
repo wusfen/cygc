@@ -758,6 +758,9 @@ html{line-height:1.5}
 .lh3{line-height:1.5}
 .lh4{line-height:2}
 
+/* z-index */
+.z1{z-index:1}
+
 /* margin */
 .mg{margin:1em}
 .mga{margin:auto}
@@ -950,7 +953,7 @@ html{line-height:1.5}
 .l0{left:0}
 .r0{right:0}
 .t0{top:0}
-.b0{buttom:0}
+.b0{bottom:0}
 .tblr0{top:0;bottom:0;left:0;right:0}
 
 /* display */
