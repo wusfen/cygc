@@ -1,8 +1,8 @@
 
     ajax.base = location.origin + '/labelling_platform/'
     if (location.protocol=='file:') {
-        ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
         ajax.base = 'http://10.4.91.91:8080/labelling_platform/'
+        ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
         // ajax.base = 'http://10.4.91.2:8088/labelling_platform/'
     }
     // ajax.useLocal = true
@@ -174,6 +174,28 @@
                         context.closePath()
                     }
                 }
+            },
+            play: function (src) {
+                vue.flashPlay(src)  
+                vue.$refs.video.src = src
+            },
+            flashPlay: function (src) {
+                var flashvars = {
+                    // src: "http://10.4.91.126:8080/1.flv",
+                    // src: "http://10.4.91.126:8080/a123.mp4",
+                    // src: "ftp://uftp:uftp@10.4.91.233/mp/123.mp4",
+                    src: src
+                };
+                var params = {
+                    allowFullScreen: true
+                    , allowScriptAccess: "always"
+                    , bgcolor: "#000000"
+                };
+                var attrs = {
+                    name: "player"
+                };
+
+                swfobject.embedSWF("lib/GrindPlayer.swf", "player", "600", "300", "10.2", null, flashvars, params, attrs);
             }
         },
         mounted: function() {
