@@ -101,11 +101,27 @@
     .input[disabled]{
         border: none;
         width: auto !important;
+        -webkit-appearance: none;
+    }
+    .sh{
+        box-shadow: 5px 7px 20px #b7b7b7c9;
+    }
+    .Mo{
+        top: 0; left: 0; right: 0; bottom: auto; margin: auto;
+        z-index: 9
+    }
+    .dot{
+        position: absolute;
+        width:4px;margin-left:-2px;height:5px;margin-top:-2px;background:#0af;border-radius:9em;
     }
     </style>
 </head>
 
-<body>
+<body><!-- 
+        <div class="sh" style="position:absolute;top:0;left:50%;margin-left:-762.5px;width:1525px;height:539px;">
+            <img src="img/m2.png">
+            <div style="width:5px;height:5px;background:#0af;border-radius:9em">222222222222</div>
+        </div> -->
     <div class="header"></div>
     <div id="vue" class="container" v-cloak>
         <div class="row">
@@ -115,9 +131,9 @@
                     <ul>
                         <li>[</li>
                         <li v-for="item in t.area">
-                            <span class="hover" :class="{active:action=='capacitySave'&&c==item}" @click="setAreaCapacity(item)">{{item.name}}</span>
+                            <span class="hover" :class="{active:page=='capacity'&&c.area_id==item.id&&!c.device_id}" @click="showPage('capacity',{area_id:item.id})">{{item.name}}</span>
                             <ol>
-                                <li v-for="device in t.device" v-if="device.area_id==item.id" :class="{active:action=='deviceSave'&&device==d}" @click="d=device">
+                                <li v-for="device in t.device" v-if="device.area_id==item.id" :class="{active:(page=='device'&&device==d)||(page=='capacity'&&device.id==c.device_id)}" @click="showPage('device',device)">
                                     <span>{{device.device_name}}</span>
                                 </li>
                                 <li class="none">
@@ -135,7 +151,7 @@
             <div class="col w18">
                 <!-- detail -->
                 <div class="detail">
-                    <div v-if="action=='deviceSave'" class="form w480 mw">
+                    <div v-if="page=='device'" class="form w480 mw">
                         <div class="row">
                             <div class="col" style="text-align:left">{</div>
                         </div>
@@ -205,8 +221,8 @@
                             <div class="col">"x1", "y1":</div>
                             <div class="col">
                                 <div class="group">
-                                    <input class="input" v-model="d.x1">
-                                    <input class="input" v-model="d.y1">
+                                    <input class="input" v-model="d.x1" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" v-model="d.y1" @focus="b.map=true" @blur="b.map=false">
                                 </div>
                             </div>
                             <div class="col">,</div>
@@ -215,8 +231,8 @@
                             <div class="col">"x2", "y2":</div>
                             <div class="col">
                                 <div class="group">
-                                    <input class="input" v-model="d.x2">
-                                    <input class="input" v-model="d.y2">
+                                    <input class="input" v-model="d.x2" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" v-model="d.y2" @focus="b.map=true" @blur="b.map=false">
                                 </div>
                             </div>
                             <div class="col">,</div>
@@ -225,8 +241,8 @@
                             <div class="col">"x3", "y3":</div>
                             <div class="col">
                                 <div class="group">
-                                    <input class="input" v-model="d.x3">
-                                    <input class="input" v-model="d.y3">
+                                    <input class="input" v-model="d.x3" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" v-model="d.y3" @focus="b.map=true" @blur="b.map=false">
                                 </div>
                             </div>
                             <div class="col">,</div>
@@ -235,8 +251,8 @@
                             <div class="col">"x4", "y4":</div>
                             <div class="col">
                                 <div class="group">
-                                    <input class="input" v-model="d.x4">
-                                    <input class="input" v-model="d.y4">
+                                    <input class="input" v-model="d.x4" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" v-model="d.y4" @focus="b.map=true" @blur="b.map=false">
                                 </div>
                             </div>
                             <div class="col">,</div>
@@ -326,15 +342,15 @@
                             <div class="col" style="width:10em"></div>
                             <div class="col">
                                 <div class="pd">
-                                    <b class="button primary" @click="deviceSave">保存</b>
-                                    <b class="button" @click="setCapacity({area_id:d.area_id,device_id:d.id})">容量设置</b>
-                                    <b class="button" @click="deviceDelete">删除</b>
-                                    <b class="button" @click="d={}">取消</b>
+                                    <b class="button sh primary" @click="deviceSave">保存</b>
+                                    <b class="button sh" @click="showPage('capacity',{device_id:d.id,area_id:d.area_id})">容量设置</b>
+                                    <b class="button sh" @click="deviceDelete">删除</b>
+                                    <b class="button sh" @click="d={}">新增设备</b>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div v-if="action=='capacitySave'" class="form w480 mw">
+                    <div v-if="page=='capacity'" class="form w480 mw">
                         <div class="row">
                             <div class="col" style="text-align:left">{</div>
                         </div>
@@ -342,34 +358,35 @@
                             <div class="col">"area_id":</div>
                             <div class="col">
                                 <span v-if="c.area_id" class="input" xv-model="c.area_id" disabled>{{c.area_id}}</span>
-                                <select class="input" v-model="c.area_id">
+                                <select class="input none" v-model="c.area_id" disabled>
                                     <option :value="void(0)">区域</option>
                                     <option v-for="item in t.area" :value="item.id">{{item.name}}</option>
                                 </select>
+                                <span class="muted">({{t.area.get({id:c.area_id}).name}})</span>
                                 <span>,</span>
                             </div>
                             <!-- <div class="col">,</div> -->
                         </div>                   
-                        <div class="row">
-                            <div class="col">"device_id":</div><div class="col"><input class="input" v-model="c.device_id"></input></div>
+                        <div v-if="c.device_id" class="row">
+                            <div class="col">"device_id":</div><div class="col"><input class="input" v-model="c.device_id"></input></div><div class="col">,</div>
                         </div>
                         <div class="row">
-                            <div class="col">"level_four":</div><div class="col"><input class="input" v-model="c.level_four"></input></div>
+                            <div class="col">"level_four":</div><div class="col"><input class="input" v-model="c.level_four"></input></div><div class="col">,</div>
                         </div>
                         <div class="row">
-                            <div class="col">"level_one":</div><div class="col"><input class="input" v-model="c.level_one"></input></div>
+                            <div class="col">"level_one":</div><div class="col"><input class="input" v-model="c.level_one"></input></div><div class="col">,</div>
                         </div>
                         <div class="row">
-                            <div class="col">"level_three":</div><div class="col"><input class="input" v-model="c.level_three"></input></div>
+                            <div class="col">"level_three":</div><div class="col"><input class="input" v-model="c.level_three"></input></div><div class="col">,</div>
                         </div>
                         <div class="row">
-                            <div class="col">"level_two":</div><div class="col"><input class="input" v-model="c.level_two"></input></div>
+                            <div class="col">"level_two":</div><div class="col"><input class="input" v-model="c.level_two"></input></div><div class="col">,</div>
                         </div>
                         <div class="row">
-                            <div class="col">"person_capacity":</div><div class="col"><input class="input" v-model="c.person_capacity"></input></div>
+                            <div class="col">"person_capacity":</div><div class="col"><input class="input" v-model="c.person_capacity"></input></div><div class="col">,</div>
                         </div>
                         <div class="row">
-                            <div class="col"></div>
+                            <div class="col" style="text-align:left">}</div>
                             <div class="col">
                                 <div class="">
                                     <b class="button primary" @click="capacitySave">保存</b>
@@ -377,12 +394,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col" style="text-align:left">}</div>
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div v-if="b.map" class="Mo sh animate">
+            <div class="dot" style="background:#0af" :style="{left:rem(d.x1),top:rem(d.y1)}"></div>
+            <div class="dot" style="background:#f80" :style="{left:rem(d.x2),top:rem(d.y2)}"></div>
+            <div class="dot" style="background:#0f8" :style="{left:rem(d.x3),top:rem(d.y3)}"></div>
+            <div class="dot" style="background:#80f" :style="{left:rem(d.x4),top:rem(d.y4)}"></div>
         </div>
     </div>
     <script src="lib/vue.js"></script>
@@ -396,8 +416,8 @@
 
     ajax.base = location.origin + '/labelling_platform/'
     if (location.protocol=='file:') {
-        ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
         ajax.base = 'http://10.4.91.91:8080/labelling_platform/'
+        ajax.base = 'http://10.4.91.126:8080/labelling_platform/'
         // ajax.base = 'http://10.4.91.2:8088/labelling_platform/'
     }
     // ajax.useLocal = true
@@ -411,27 +431,44 @@
             },
             d:{
                 // area_id: ''
+                x1:'',y1:'',
+                x2:'',y2:'',
+                x3:'',y3:'',
+                x4:'',y4:'',
             },
             c:{
                 area_id: ''
             },
-            action: 'deviceSave',
-        },
-        watch:{
-            d: function () {
-                vue.action = 'deviceSave'
+            // route
+            page: 'device', // capacity
+            args: {},
+            b:{
+                map: false
             }
         },
-        methods: {
-            setAreaCapacity: function (info) {
-                window.info = info
-                vue.action = 'capacitySave'
-                vue.c = Object.assign(info, vue.t.capacity.get({area_id:info.id, 'device_id==':null}))
+        watch:{
+            xd: function () {
+                vue.route = 'device/add'
             },
-            setCapacity: function (info) {
-                window.info = info
-                vue.action = 'capacitySave'
-                vue.c = Object.assign(info, vue.t.capacity.get({device_id:info.device_id}))
+        },
+        methods: {
+            rem: function(x) {
+                return x / 100 + 'rem'
+            },
+            showPage: function (page, args) {
+                vue.page = page
+                vue.args = args
+                if (page=='device') {
+                    vue.d = args
+                }
+                if (page=='capacity') { //  区域容量有 area_id 没有 device_id, 设备容量同时有
+                    if (args.device_id&&args.area_id) {
+                        vue.c = vue.t.capacity.select({device_id:args.device_id}).get({area_id:args.area_id}) || args
+                    }
+                    if (args.area_id&&!args.device_id) {
+                        vue.c = vue.t.capacity.get({area_id:args.area_id, 'device_id==':null}) || args
+                    }
+                }
             },
             areaLoad: function() {
                 ajax({
@@ -472,6 +509,8 @@
                 })
             },
             deviceDelete: function (id) {
+                if (!confirm()) return
+
                 $.ajax({
                     url: ajax.base+
                     '/deviceAction/delDevice.do',

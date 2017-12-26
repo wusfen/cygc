@@ -36,7 +36,7 @@
 
 <body>
     <div class="header"></div>
-    <div id="vue" class="container">
+    <div id="vue" class="container" v-cloak>
         <div class="backdraw"></div>
         <!-- 人员列表 -->
         <div class="Lo">
@@ -65,8 +65,8 @@
             <div class="ts">
                 <!-- type 000-wifi嗅探器,001-摄像头 -->
                 <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it" :class="{
-                    type001:item.type=='001',
-                    active:selected.track==item&&item.type=='001',
+                    type00n:item.type!='000',
+                    active:selected.track==item&&item.type!='000',
                 }" @click="selected.track=item">
                     
                 </span>
@@ -80,11 +80,11 @@
         <div class="Vo">
             <div class="vt">监控人员-{{selected.track.deviceName}}</div>
             <!-- <video src="http://10.4.91.126:8080/123.mp4" controlsxxx autoplay loop></video> -->
-            <!-- <video id="video" :src="selected.track.src" controlsxx autoplay loop @dblclick="videoFullscreen()"></video> -->
+            <video id="video" :src="selected.track.src" controlsxx autoplay loop @dblclick="videoFullscreen()"></video>
             <!-- <video>
                 <source src="ftp://uftp:uftp@10.4.91.233/mp/123.mp4" controls type="video/mp4"></source>
             </video> -->
-            <div id="player" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0"></div>
+            <!-- <div id="player" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0"></div> -->
         </div>
         <!-- 人员信息 -->
         <div v-if="selected.person" class="Io">

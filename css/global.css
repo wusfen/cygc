@@ -135,11 +135,11 @@ html {
 
 .Mo.p1 {
     position: absolute;
-    top: 1.18rem;
+    top: 1.1rem;
     left: 0.36rem;
     right: 0;
     bottom: 0;
-    transform: rotateY(35.4deg);
+    transform: rotateY(30.8deg) scale(.95);
     transform-origin: left;
 }
 
@@ -234,12 +234,12 @@ html {
     transition: .25s;
 }
 
-.Mo .ts .it.type001 { /*摄像头*/
+.Mo .ts .it.type00n { /*非 000*/
     cursor: pointer;
     background: #f60;
 }
 
-.Mo .ts .it.type001:hover {
+.Mo .ts .it.type00n:hover {
     transform: scale(1.5);
 }
 
@@ -255,7 +255,6 @@ html {
     top: 100px;
     width: 0;
     height: 0;
-    cursor: pointer;
 }
 
 .Mo .ts .p .i {
@@ -607,7 +606,7 @@ html {
     ::-webkit-scrollbar-thumb {
         min-height: 20px;
         background-clip: content-box;
-        box-shadow: 0 0 0 5px rgba(0, 0, 0, .2) inset
+        box-shadow: 0 0 0 5px rgba(125, 125, 125, 0.5) inset
     }
     ::-webkit-scrollbar-corner {
         background: transparent
