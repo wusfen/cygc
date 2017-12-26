@@ -221,8 +221,8 @@
                             <div class="col">"x1", "y1":</div>
                             <div class="col">
                                 <div class="group">
-                                    <input class="input" v-model="d.x1" @focus="b.map=true" @blur="b.map=false">
-                                    <input class="input" v-model="d.y1" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" type="number" v-model="d.x1" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" type="number" v-model="d.y1" @focus="b.map=true" @blur="b.map=false">
                                 </div>
                             </div>
                             <div class="col">,</div>
@@ -231,8 +231,8 @@
                             <div class="col">"x2", "y2":</div>
                             <div class="col">
                                 <div class="group">
-                                    <input class="input" v-model="d.x2" @focus="b.map=true" @blur="b.map=false">
-                                    <input class="input" v-model="d.y2" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" type="number" v-model="d.x2" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" type="number" v-model="d.y2" @focus="b.map=true" @blur="b.map=false">
                                 </div>
                             </div>
                             <div class="col">,</div>
@@ -241,8 +241,8 @@
                             <div class="col">"x3", "y3":</div>
                             <div class="col">
                                 <div class="group">
-                                    <input class="input" v-model="d.x3" @focus="b.map=true" @blur="b.map=false">
-                                    <input class="input" v-model="d.y3" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" type="number" v-model="d.x3" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" type="number" v-model="d.y3" @focus="b.map=true" @blur="b.map=false">
                                 </div>
                             </div>
                             <div class="col">,</div>
@@ -251,8 +251,8 @@
                             <div class="col">"x4", "y4":</div>
                             <div class="col">
                                 <div class="group">
-                                    <input class="input" v-model="d.x4" @focus="b.map=true" @blur="b.map=false">
-                                    <input class="input" v-model="d.y4" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" type="number" v-model="d.x4" @focus="b.map=true" @blur="b.map=false">
+                                    <input class="input" type="number" v-model="d.y4" @focus="b.map=true" @blur="b.map=false">
                                 </div>
                             </div>
                             <div class="col">,</div>
@@ -345,7 +345,7 @@
                                     <b class="button sh primary" @click="deviceSave">保存</b>
                                     <b class="button sh" @click="showPage('capacity',{device_id:d.id,area_id:d.area_id})">容量设置</b>
                                     <b class="button sh" @click="deviceDelete">删除</b>
-                                    <b class="button sh" @click="d={}">新增设备</b>
+                                    <b class="button sh" @click="d={x1:'',y1:'',x2:'',y2:'',x3:'',y3:'',x4:'',y4:''}">新增设备</b>
                                 </div>
                             </div>
                         </div>
@@ -390,7 +390,7 @@
                             <div class="col">
                                 <div class="">
                                     <b class="button primary" @click="capacitySave">保存</b>
-                                    <!-- <b class="button" @click="capacityDelete">删除</b> -->
+                                    <b class="button" @click="page='device'">返回</b>
                                 </div>
                             </div>
                         </div>
@@ -399,10 +399,10 @@
             </div>
         </div>
         <div v-if="b.map" class="Mo sh animate">
-            <div class="dot" style="background:#0af" :style="{left:rem(d.x1),top:rem(d.y1)}"></div>
-            <div class="dot" style="background:#f80" :style="{left:rem(d.x2),top:rem(d.y2)}"></div>
-            <div class="dot" style="background:#0f8" :style="{left:rem(d.x3),top:rem(d.y3)}"></div>
-            <div class="dot" style="background:#80f" :style="{left:rem(d.x4),top:rem(d.y4)}"></div>
+            <div class="dot" style="background:#f00" :style="{left:rem(d.x1),top:rem(d.y1)}"></div>
+            <div class="dot" style="background:#0f0" :style="{left:rem(d.x2),top:rem(d.y2)}"></div>
+            <div class="dot" style="background:#0af" :style="{left:rem(d.x3),top:rem(d.y3)}"></div>
+            <div class="dot" style="background:#f80" :style="{left:rem(d.x4),top:rem(d.y4)}"></div>
         </div>
     </div>
     <script src="lib/vue.js"></script>
