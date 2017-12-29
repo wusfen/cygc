@@ -35,7 +35,7 @@
 </head>
 
 <body>
-    <div class="header"></div>
+    <div class="header p2"></div>
     <div id="vue" class="container" v-cloak>
         <div class="backdraw"></div>
         <!-- 人员列表 -->
@@ -63,28 +63,49 @@
                 </div>
             </div>
             <div class="ts">
-                <!-- type 000-wifi嗅探器,001-摄像头 -->
-                <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it" :class="{
-                    type00n:item.type!='000',
-                    active:selected.track==item&&item.type!='000',
-                }" @click="play(item.src)">
-                    
-                </span>
-                <div v-if="!Object.isEmpty(table.track)" class="p" :style="{top:rem(table.track.last().y),left:rem(table.track.last().x)}" @click="selected.track=table.track.last()">
+                <!-- 人头像 -->
+                <div v-if="!Object.isEmpty(table.track)" class="p" :style="{top:rem(table.track.last().y),left:rem(table.track.last().x)}">
                     <img class="i" :src="selected.person.avatar">
                     <span class="d"></span>
                 </div>
+                <!-- 轨迹点 -->
+                <!-- type 000-wifi嗅探器,001-摄像头,... -->
+                <span v-for="item in table.track" :style="{top:rem(item.y),left:rem(item.x)}" class="it" 
+                    :class="{
+                        type00x:item.type!='000',
+                        active:[selected.track].eq([item])&&item.type!='000',
+                        hover:hover.track==item,
+                    }"
+                    :title="item.deviceName"
+                    @click="item.type!='000'&&(play(item.src),(selected.track=item))">
+                </span>
+                <!-- 摄像头视频列表 -->
+                <ol @mouseleave="hover.track={}">
+                    <li v-for="(item,index) in table.track.select({'type!=':'000',deviceName:selected.track.deviceName})" xv-if="item.type!='000'" :class="{
+                        type00x:item.type!='000',
+                        active:[selected.track].eq([item])&&item.type!='000',
+                    }"
+                    @click="item.type!='000'&&(play(item.src),(selected.track=item))"
+                    @mouseenter="hover.track=item"
+                    >
+                        <span>{{index+1}}</span>
+                        <!-- <span>{{item.deviceName}}</span> -->
+                    </li>
+                </ol>
             </div>
         </div>
         <!-- 视频 -->
         <div class="Vo">
-            <div class="vt">监控人员-{{selected.track.deviceName}}</div>
+            <div class="vt">人员监控-{{selected.track.deviceName}}</div>
             <!-- <video src="http://10.4.91.126:8080/123.mp4" controlsxxx autoplay loop></video> -->
             <!-- <video>
                 <source src="ftp://uftp:uftp@10.4.91.233/mp/123.mp4" controls type="video/mp4"></source>
             </video> -->
             <div id="player" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0"></div>
             <video id="video" ref="video" controlsxx autoplay loop @dblclick="videoFullscreen()"></video>
+            <div v-if="loading" class="loading">
+                <img src="img/loading.gif">
+            </div>
         </div>
         <!-- 人员信息 -->
         <div v-if="selected.person" class="Io">
@@ -106,26 +127,30 @@
     <script src="lib/echarts.min.js"></script>
     <script src="js/global.js"></script>
     <script>
-        vue.$watch('selected.area', function () {
-            vue.subAreaLoad(vue.selected.area)
-            vue.subCountLoad(vue.selected.area)
-        })
+    vue.$watch('selected.area', function() {
+        vue.subAreaLoad(vue.selected.area)
+        vue.subCountLoad(vue.selected.area)
+    })
 
-        vue.$watch('table.person', function () {
-            // vue.selected.person = vue.table.person.first()
-        })
-        // vue.$watch('selected.person', function() {
-        //     vue.trackLoad()
-        // })
+    vue.$watch('table.person', function() {
+        if (Object.isEmpty(vue.selected.person)) {
+            vue.selected.person = vue.table.person.first()
+            vue.trackLoad(true)
+        }
+    })
+    // vue.$watch('selected.person', function() {
+    //     vue.trackLoad()
+    // })
 
-        vue.areaLoad()
+    vue.areaLoad()
+    vue.countLoad()
+    vue.personLoad()
+    setInterval(function() {
         vue.countLoad()
         vue.personLoad()
-        setInterval(function () {
-            vue.countLoad()
-            vue.personLoad()
-            vue.selected.person.id && vue.trackLoad()
-        }, 30000)
+        vue.selected.person.id && vue.trackLoad()
+        vue.areaLoad()
+    }, 10000)
     </script>
     <script type="text/javascript" src="lib/swfobject.min.js"></script>
 </body>

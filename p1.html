@@ -59,15 +59,16 @@
                     <!-- <canvas id="canvas" width="1525" height="539"></canvas> -->
                     <div class="map"></div>
                     <div class="ls">
-                        <div v-for="item in table.subArea" class="it fxcm area" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
+                        <div v-for="item in table.subArea" class="it fxcm fxdc area" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
                                 lv0: table.subCount.get({name:item.name}).level==0,
                                 lv1: table.subCount.get({name:item.name}).level==1,
                                 lv2: table.subCount.get({name:item.name}).level==2,
                                 lv3: table.subCount.get({name:item.name}).level==3,
                                 lv4: table.subCount.get({name:item.name}).level==4,
-                            }">
-                            <div class="t">{{item.name}}: </div>
-                            <div class="n" style="font-size:.2rem">{{table.subCount.get({name:item.name}).value}}</div>
+                                curp:!item.isDevice
+                            }" @click="item.isDevice||(selected.area=item)">
+                            <div class="t" style="font-size:.1em;color:#eee">{{item.name}}</div>
+                            <div class="n" style="font-size:.2rem;line-height:1">{{table.subCount.get({name:item.name}).value}}</div>
                         </div>
                     </div>
                 </div>
@@ -83,6 +84,7 @@
         </div>
         <!-- 预测 -->
         <div class="R1 Ro">
+            <div class="rt">未来3分钟人数预测</div>
             <div class="ls">
                 <div v-for="item in table.area" class="it fxcm area" :style="{width:areaPercent(item)}" :class="{
                     lv0: table.forecast3.count.get({name:item.name}).level==0,
@@ -108,6 +110,7 @@
             </div>
         </div>
         <div class="R2 Ro">
+            <div class="rt">未来5分钟人数预测</div>
             <div class="ls">
                 <div v-for="item in table.area" class="it fxcm area" :style="{width:areaPercent(item)}" :class="{
                     lv0: table.forecast3.count.get({name:item.name}).level==0,
@@ -133,6 +136,7 @@
             </div>
         </div>
         <div class="R3 Ro">
+            <div class="rt">未来10分钟人数预测</div>
             <div class="ls">
                 <div v-for="item in table.area" class="it fxcm area" :style="{width:areaPercent(item)}" :class="{
                     lv0: table.forecast3.count.get({name:item.name}).level==0,
@@ -228,7 +232,8 @@
         vue.forecastLoad(3)
         vue.forecastLoad(5)
         vue.forecastLoad(10)
-    }, 30000)
+	    vue.areaLoad()
+    }, 10000)
     </script>
     <script>
     var chart = echarts.init(document.getElementById('chart'));

@@ -3,11 +3,14 @@
     "msg": "success",
     "data": [
     {
-        "id": 1,
-        "name": "A区",
-        "x": 1430,
-        "y": 433,
-        "width": 70,
-        "height": 20,
-    }]
+        "id": 6,
+        "name": "B2区",
+        "x": 200,
+        "y": 333,
+        "width": 170,
+        "height": 150,
+        "parentId": 2,
+        "isDevice": true,
+    }
+]
 }

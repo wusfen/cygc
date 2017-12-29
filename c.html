@@ -11,8 +11,9 @@
   if(Hls.isSupported()) {
     var video = document.getElementById('video');
     var hls = new Hls();
-    hls.loadSource('http://10.4.91.126:8080/a123.mp4');
+    // hls.loadSource('http://10.4.91.126:8080/a123.mp4');
     // hls.loadSource('https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8');
+    hls.loadSource("E:/上海项目/video/'A','V','C','1'.mp4");
     hls.attachMedia(video);
     hls.on(Hls.Events.MANIFEST_PARSED,function() {
 	    	alert()
