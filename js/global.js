@@ -28,11 +28,14 @@ var vue = new Vue({
             },
             person: [],
             track: [],
+            trackTest: [],
+            personTest: [],
         },
         selected: {
             person: {},
             track: {},
             area: {},
+            personTest: {}
         },
         hover: {
             track: {},
@@ -42,6 +45,7 @@ var vue = new Vue({
         subAreaPosition: {},
         total: 0,
         loading: false,
+        currentVideoIp: '',
     },
     methods: {
         hh: function(argument) {
@@ -147,6 +151,26 @@ var vue = new Vue({
                 }
             })
         },
+        personTestLoad: function() {
+            ajax({
+                local: 'data/personTest.json',
+                url: 'trajectory/listTargetInfo.do xxxxxxxxxxx  todo',
+                success: function(res) {
+                    var data = res.data || []
+                    vue.table.personTest = data
+                }
+            })
+        },
+        currentVideoIpSearch: function () {
+            ajax({
+                url: 'trajectory/getCurrentVideoIp.do',
+                local: 'getCurrentVideoIp.json',
+                success: function (res) {
+                    var data = res.data || ''
+                    vue.currentVideoIp = data
+                }
+            })
+        },
         trackLoad: function(isFirst) {
             ajax({
                 local: 'data/listPersonTrajectory.json',
@@ -164,6 +188,56 @@ var vue = new Vue({
                     vue.trackDraw(isFirst)
                 }
             })
+        },
+        trackTestLoad: function() {
+            ajax({
+                local: 'data/listMacTrace.json',
+                success: function(res) {
+                    var data = res.data || []
+                    vue.table.trackTest = data
+                }
+            })
+        },
+        trackTestDraw: function() {
+            context.clearRect(0, 0, context.canvas.width, context.canvas.height) // clear
+
+            var list = vue.table.trackTest
+            var colorList = ['#0af', '#fa0', '#0f0', '#0ff', '#ff0', '#fff', '#000', '#f00', '#f0a']
+            var group = list.groupBy('mac')
+            var macList = Object.keys(group)
+
+            for (var i = 0; i < macList.length; i++) {
+                var mac = macList[i]
+                var line = group[mac]
+                vue.drawLine(line, colorList[i])
+            }
+
+        },
+        drawLine: function(list, color) {
+            context.strokeStyle = color
+            context.lineWidth = 2
+
+            for (var i = 0; i < list.length; i++) {
+                var pre = list[i - 1]
+                var item = list[i]
+                // line
+                if (pre) {
+                    context.beginPath()
+                    context.moveTo(pre.x, pre.y)
+                    context.lineTo(item.x, item.y)
+                    context.stroke()
+                    context.closePath()
+                }
+                // dot
+                context.fillStyle = item==list.last()?'#fff':color;
+                context.beginPath();
+                context.arc(item.x, item.y, 4, 0, Math.PI * 2, true);
+                context.closePath();
+                context.fill();
+            }
+        },
+        drawDot: function(item) {
+
         },
         trackDraw: function(isFirst) {
             isFirst = false // !!! 去掉延时 ** 中间断？？

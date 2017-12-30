@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>.人员监控@光启超级智能追踪系统</title>
+    <script>
+    addEventListener('resize', function f() {
+        var html = document.documentElement,
+            width = html.clientWidth,
+            height = html.clientHeight;
+        html.style.fontSize = (width > height * 1920 / 1080 ? height * 1920 / 1080 : width) * 100 / 1920 + 'px';
+        return f
+    }());
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <style type="text/css">
+    body{
+        font-size: 28%;
+        color: #fff;
+    }
+    .container .backdraw {
+        background-image: url(img/p2.l.png);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="header p2"></div>
+    <div id="vue" class="container" v-cloak>
+        <div class="backdraw"></div>
+        <!-- 人员列表 -->
+        <div class="Lo">
+            <div class="ls">
+                <div v-for="item in table.personTest" class="it" style="cursor:default;">
+                    <img class="i" :src="item.avatar">
+                    <div class="t">{{item.name||item.targetName}}</div>
+                    <div style="clear:both">{{item.phone}}</div>
+                    <div style="clear:both">{{item.phone1}}</div>
+                    <div style="clear:both">{{item.phone2}}</div>
+                </div>
+            </div>
+        </div>
+        <!-- map -->
+        <div class="Mo">
+            <canvas id="canvas" width="1525" height="539"></canvas>
+            <div class="ts">
+                <!-- 人头像 -->
+                <div v-if="!Object.isEmpty(table.track)" class="p" :style="{top:rem(table.track.last().y),left:rem(table.track.last().x)}">
+                    <img class="i" :src="selected.person.avatar">
+                    <span class="d"></span>
+                    <span class="m">mac: {{table.track.get({'mac!=':0}).mac}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- 视频 -->
+        <div class="Vo">
+            <div class="vt">人员监控-{{selected.track.deviceName}}</div>
+            <!-- <video src="http://10.4.91.126:8080/123.mp4" controlsxxx autoplay loop></video> -->
+            <!-- <video>
+                <source src="ftp://uftp:uftp@10.4.91.233/mp/123.mp4" controls type="video/mp4"></source>
+            </video> -->
+            <!-- <div id="player" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0"></div> -->
+            <video id="video" ref="video" controlsxx autoplay loop @dblclick="videoFullscreen()"></video>
+            <div v-if="loading" class="loading">
+                <img src="img/loading.gif">
+            </div>
+            <!-- 摄像头视频列表 -->
+            <ol class="mvs" @mouseleave="hover.track={}">
+                <li v-for="(item,index) in table.track.select({'type!=':'000',deviceName:selected.track.deviceName})" xv-if="item.type!='000'" :class="{
+                    type00x:item.type!='000',
+                    active:[selected.track].eq([item])&&item.type!='000',
+                }" @click="item.type!='000'&&(play(item.src),(selected.track=item))" @mouseenter="hover.track=item">
+                    <span>{{index+1}}</span>
+                    <!-- <span>{{item.deviceName}}</span> -->
+                </li>
+            </ol>
+        </div>
+        <!-- 人员信息 -->
+        <div v-if="selected.personTest" class="Io">
+            <div class="ls">
+                <div class="it">姓　　名：{{selected.personTest.targetName}}</div>
+                <div class="it">性　　别：{{selected.personTest.targetSex}}</div>
+                <div class="it">手　　机：{{selected.personTest.phone}}</div>
+                <div class="it">手　　机：{{selected.personTest.phone1}}</div>
+                <div class="it">手　　机：{{selected.personTest.phone2}}</div>
+            </div>
+            <img class="i" :src="selected.person.avatar">
+        </div>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script src="lib/proto.js"></script>
+    <script src="lib/$.js"></script>
+    <script src="lib/ajax.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/echarts.min.js"></script>
+    <script src="js/global.js"></script>
+    <script>
+    vue.$watch('table.trackTest', function() {
+        vue.trackTestDraw()
+    })
+    vue.$watch('currentVideoIp', function() {
+        vue.trackTestDraw()
+    })
+    vue.$watch('table.personTest', function() {
+        vue.selected.personTest=vue.table.personTest.get({isVideo:true})
+    })
+
+    function load() {
+        vue.personTestLoad()
+        vue.trackTestLoad()
+    }
+    load()
+    setInterval(function() {
+        load()
+    }, 5000)
+    </script>
+    <script type="text/javascript" src="lib/swfobject.min.js"></script>
+</body>
+
+</html>

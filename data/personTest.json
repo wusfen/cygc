@@ -1,0 +1,30 @@
+{
+    "error": 0,
+    "msg": "success",
+    "data": [
+    {
+        "id": 1,
+        "identityId": "4311XXXX",
+        "targetName": "张警官",
+        "targetSex": "男",
+        "mac": "b8:37:65:58:e1:d3",
+        "mac1": "b8:37:65:58:e1:dd",
+        "mac2": "mac3",
+        "phone": "135XXX",
+        "phone2": "132XXX",
+        "phone1": "134XXX",
+        "isVideo": true
+    },
+    {
+        "id": 2,
+        "identityId": "432969XX",
+        "targetName": "李警官",
+        "targetSex": "女",
+        "mac": "mac-a",
+        "mac1": "mac-b",
+        "mac2": "mac-c",
+        "phone": "189XXX",
+        "phone2": "186XXX",
+        "phone1": "187XX"
+    }]
+}
