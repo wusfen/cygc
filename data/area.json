@@ -2,56 +2,85 @@
     "error": 0,
     "msg": "success",
     "data": [
-    {
-        "id": 1,
-        "name": "A区",
-        "x": 2,
-        "y": 233,
-        "width": 170,
-        "height": 300,
-    },
-    {
-        "id": 2,
-        "name": "B区",
-        "x": 175,
-        "y": 233,
-        "width": 182,
-        "height": 300,
-    },
-    {
-        "id": 3,
-        "name": "C区",
-        "x": 357,
-        "y": 233,
-        "width": 182,
-        "height": 300,
-    },
-    {
-        "id": 4,
-        "name": "D区",
-        "x": 539,
-        "y": 233,
-        "width": 182,
-        "height": 300,
-    },
-
-    {
-        "id": 5,
-        "name": "B1区",
-        "x": 175,
-        "y": 233,
-        "width": 170,
-        "height": 150,
-        "parentId": 2,
-    },
-    {
-        "id": 6,
-        "name": "B2区",
-        "x": 200,
-        "y": 333,
-        "width": 170,
-        "height": 150,
-        "parentId": 2,
-    }
-]
+      {
+        "id":1,
+        "x":6,
+        "y":427,
+        "name":"江堤8号通道",
+        "width":225,
+        "height":110,
+        "parentId":0,
+        "shortName":"A区"
+      },
+      {
+        "id":2,
+        "x":233,
+        "y":400,
+        "name":"江堤7号通道",
+        "width":200,
+        "height":110,
+        "parentId":0,
+        "shortName":"B区"
+      },
+      {
+        "id":3,
+        "x":433,
+        "y":400,
+        "name":"江堤6-7号通道",
+        "width":300,
+        "height":95,
+        "parentId":0,
+        "shortName":"C区"
+      },
+      {
+        "id":4,
+        "x":733,
+        "y":272,
+        "name":"江堤5号通道",
+        "width":230,
+        "height":115,
+        "parentId":0,
+        "shortName":"D区"
+      },
+      {
+        "id":5,
+        "x":733,
+        "y":385,
+        "name":"江堤6号通道",
+        "width":230,
+        "height":95,
+        "parentId":0,
+        "shortName":"E区"
+      },
+      {
+        "id":6,
+        "x":960,
+        "y":255,
+        "name":"陈毅广场北侧",
+        "width":260,
+        "height":130,
+        "parentId":0,
+        "shortName":"F区"
+      },
+      {
+        "id":7,
+        "x":1220,
+        "y":255,
+        "name":"陈毅广场南侧",
+        "width":280,
+        "height":130,
+        "parentId":0,
+        "shortName":"G区"
+      },
+      {
+        "id":8,
+        "x":960,
+        "y":385,
+        "name":"江堤4号通道",
+        "width":540,
+        "height":95,
+        "parentId":0,
+        "shortName":"H区"
+      }
+    ],
 }

@@ -27,138 +27,164 @@
     }());
     </script>
     <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="lib/animate.css">
 </head>
 
 <body>
-    <div class="header"></div>
-    <div id="vue" class="container" v-cloak>
-        <div class="backdraw"></div>
-        <!-- 实时人数 -->
-        <div class="Mo p1">
-            <canvas id="canvas" width="1525" height="539"></canvas>
-            <div class="map"></div>
-            <div class="ls">
-                <div v-for="item in table.area" class="it fxcm fxdc area curp" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
-                        lv0: table.count.get({name:item.name}).level==0,
-                        lv1: table.count.get({name:item.name}).level==1,
-                        lv2: table.count.get({name:item.name}).level==2,
-                        lv3: table.count.get({name:item.name}).level==3,
-                        lv4: table.count.get({name:item.name}).level==4,
-                        active: selected.area==item
-                    }" @click="selected.area=item">
-                    <div class="t">{{item.name}}</div>
-                    <div class="n">{{table.count.get({name:item.name}).value}}</div>
+    <div id="vue" v-cloak>
+        <div class="header"></div>
+        <div class="container">
+            <div class="backdraw"></div>
+            <!-- 实时人数 -->
+            <div class="Mo p1">
+                <canvas id="canvas" width="1525" height="539"></canvas>
+                <div class="map"></div>
+                <div class="ls">
+                    <div v-for="item in table.area" class="it fxcm fxdc area curp" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
+	                        lv0: table.count.get({id:item.id}).level==0,
+	                        lv1: table.count.get({id:item.id}).level==1,
+	                        lv2: table.count.get({id:item.id}).level==2,
+	                        lv3: table.count.get({id:item.id}).level==3,
+	                        lv4: table.count.get({id:item.id}).level==4,
+	                        active: [selected.area].eq([item])
+	                    }" @click="selected.area=item">
+                        <div class="t">{{item.shortName}}</div>
+                        <div class="t">{{item.name}}</div>
+                        <div class="n">
+                            <span>{{table.count.get({name:item.name}).value}}</span>
+                            <span v-if="table.count.get({id:item.id}).increatment>0" class="a">↑</span>
+                            <span v-if="table.count.get({id:item.id}).increatment==0" class="a" style="color:#eee">→</span>
+                            <span v-if="table.count.get({id:item.id}).increatment<0" class="a r">↓</span>
+                        </div>
+                        <!-- <span v-if="table.count.get({id:item.id}).increatment>0" class="a">↑ {{(table.count.get({id:item.id}).increatment*100).fixed()+'%'}}</span> -->
+                        <!-- <span v-if="table.count.get({id:item.id}).increatment<0" class="a r">↓ {{(table.count.get({id:item.id}).increatment*100).fixed()+'%'}}</span> -->
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- 区细分图 -->
-        <div class="So">
-            <span class="st fxcm">{{selected.area.name||'区域'}}细分图</span>
-            <div class="slice">
-                <div class="Mo" :style="subAreaPosition">
-                    <!-- <canvas id="canvas" width="1525" height="539"></canvas> -->
-                    <div class="map"></div>
-                    <div class="ls">
-                        <div v-for="item in table.subArea" class="it fxcm fxdc area" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
-                                lv0: table.subCount.get({name:item.name}).level==0,
-                                lv1: table.subCount.get({name:item.name}).level==1,
-                                lv2: table.subCount.get({name:item.name}).level==2,
-                                lv3: table.subCount.get({name:item.name}).level==3,
-                                lv4: table.subCount.get({name:item.name}).level==4,
-                                curp:!item.isDevice
-                            }" @click="item.isDevice||(selected.area=item)">
-                            <div class="t" style="font-size:.1em;color:#eee">{{item.name}}</div>
-                            <div class="n" style="font-size:.2rem;line-height:1">{{table.subCount.get({name:item.name}).value}}</div>
+            <!-- 区细分图 -->
+            <div class="Xo">
+                <span class="xt fxcm curp" @click="vx=!vx">{{selected.area.name||'区域'}}</span>
+                <div class="slice" :class="{rotateY90:!vx}">
+                    <div class="Mo" :style="subAreaPosition">
+                        <!-- <canvas id="canvas" width="1525" height="539"></canvas> -->
+                        <div class="map"></div>
+                        <div class="ls">
+                            <div v-for="item in table.subArea" class="it fxcm fxdc area" :style="{left:rem(item.x),top:rem(item.y),width:rem(item.width),height:rem(item.height)}" :class="{
+	                                lv0: table.subCount.get({name:item.name}).level==0,
+	                                lv1: table.subCount.get({name:item.name}).level==1,
+	                                lv2: table.subCount.get({name:item.name}).level==2,
+	                                lv3: table.subCount.get({name:item.name}).level==3,
+	                                lv4: table.subCount.get({name:item.name}).level==4,
+	                                curp: !item.isDevice
+	                            }" @click="item.isDevice?(vv=false):(selected.area=item)">
+                                <div class="t" style="font-size:.1em;color:#eee">{{item.name}}</div>
+                                <div class="n" style="font-size:.2rem;line-height:1">{{table.subCount.get({name:item.name}).value}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- 线图 -->
+            <div id="Zo" class="Zo" :class="{rotateY90:vx}">xx</div>
+            <!-- 环图 -->
+            <div class="Co">
+                <div class="ct fxcm fxdc" @click="vx=!vx;selected.area={id:0,name:'总区域'}">
+                    <div class="t">当前总人数</div>
+                    <div class="n">{{total}}</div>
+                </div>
+                <div id="chart"></div>
+            </div>
+            <!-- 预测 -->
+            <div class="R1 Ro">
+                <div class="rt">未来3分钟人数预测</div>
+                <span class="tt">总人数：{{table.forecast3.count.sum('value')}}</span>
+                <div class="ls">
+                    <div v-for="item in table.area" class="it fxcm area animated infinite" :style="{width:areaPercent(item)}" :class="{
+	                    lv0: table.forecast3.count.get({name:item.shortName}).level==0,
+	                    lv1: table.forecast3.count.get({name:item.shortName}).level==1,
+	                    lv2: table.forecast3.count.get({name:item.shortName}).level==2,
+	                    lv3: table.forecast3.count.get({name:item.shortName}).level==3,
+	                    lv4: table.forecast3.count.get({name:item.shortName}).level==4,
+	                    active: selected.area==item,
+	                    flash: item.level>1,
+	                }" @click="selected.area=item">
+                        <div class="t">{{item.shortName}}</div>
+                        <div class="n">{{table.forecast3.count.get({name:item.shortName}).value}}</div>
+                    </div>
+                </div>
+                <div class="msg">
+                    <div v-for="item in table.forecast3.tip" class="it">
+                        <span v-if="item.level==0" class="dot lv0"></span>
+                        <span v-if="item.level==1" class="dot lv1"></span>
+                        <span v-if="item.level==2" class="dot lv2"></span>
+                        <span v-if="item.level==3" class="dot lv3"></span>
+                        <span v-if="item.level==4" class="dot lv4"></span>
+                        <div class="txt">{{item.msg}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="R2 Ro">
+                <div class="rt">未来5分钟人数预测</div>
+                <span class="tt">总人数：{{table.forecast5.count.sum('value')}}</span>
+                <div class="ls">
+                    <div v-for="item in table.area" class="it fxcm area animated infinite" :style="{width:areaPercent(item)}" :class="{
+	                    lv0: table.forecast5.count.get({name:item.shortName}).level==0,
+	                    lv1: table.forecast5.count.get({name:item.shortName}).level==1,
+	                    lv2: table.forecast5.count.get({name:item.shortName}).level==2,
+	                    lv3: table.forecast5.count.get({name:item.shortName}).level==3,
+	                    lv4: table.forecast5.count.get({name:item.shortName}).level==4,
+	                    active: selected.area==item,
+	                    flash: item.level>1,
+	                }" @click="selected.area=item">
+                        <div class="t">{{item.shortName}}</div>
+                        <div class="n">{{table.forecast5.count.get({name:item.shortName}).value}}</div>
+                    </div>
+                </div>
+                <div class="msg">
+                    <div v-for="item in table.forecast5.tip" class="it">
+                        <span v-if="item.level==0" class="dot lv0"></span>
+                        <span v-if="item.level==1" class="dot lv1"></span>
+                        <span v-if="item.level==2" class="dot lv2"></span>
+                        <span v-if="item.level==3" class="dot lv3"></span>
+                        <span v-if="item.level==4" class="dot lv4"></span>
+                        <div class="txt">{{item.msg}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="R3 Ro">
+                <div class="rt">未来10分钟人数预测</div>
+                <span class="tt">总人数：{{table.forecast10.count.sum('value')}}</span>
+                <div class="ls">
+                    <div v-for="item in table.area" class="it fxcm area animated infinite" :style="{width:areaPercent(item)}" :class="{
+	                    lv0: table.forecast10.count.get({name:item.shortName}).level==0,
+	                    lv1: table.forecast10.count.get({name:item.shortName}).level==1,
+	                    lv2: table.forecast10.count.get({name:item.shortName}).level==2,
+	                    lv3: table.forecast10.count.get({name:item.shortName}).level==3,
+	                    lv4: table.forecast10.count.get({name:item.shortName}).level==4,
+	                    active: selected.area==item,
+	                    flash: item.level>1,
+	                }" @click="selected.area=item">
+                        <div class="t">{{item.shortName}}</div>
+                        <div class="n">{{table.forecast10.count.get({name:item.shortName}).value}}</div>
+                    </div>
+                </div>
+                <div class="msg">
+                    <div v-for="item in table.forecast10.tip" class="it">
+                        <span v-if="item.level==0" class="dot lv0"></span>
+                        <span v-if="item.level==1" class="dot lv1"></span>
+                        <span v-if="item.level==2" class="dot lv2"></span>
+                        <span v-if="item.level==3" class="dot lv3"></span>
+                        <span v-if="item.level==4" class="dot lv4"></span>
+                        <div class="txt">{{item.msg}}</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- 环图 -->
-        <div class="Co">
-            <div class="ct">
-                <div class="t">当前总人数</div>
-                <div class="n">{{total}}</div>
-            </div>
-            <div id="chart"></div>
-        </div>
-        <!-- 预测 -->
-        <div class="R1 Ro">
-            <div class="rt">未来3分钟人数预测</div>
-            <div class="ls">
-                <div v-for="item in table.area" class="it fxcm area" :style="{width:areaPercent(item)}" :class="{
-                    lv0: table.forecast3.count.get({name:item.name}).level==0,
-                    lv1: table.forecast3.count.get({name:item.name}).level==1,
-                    lv2: table.forecast3.count.get({name:item.name}).level==2,
-                    lv3: table.forecast3.count.get({name:item.name}).level==3,
-                    lv4: table.forecast3.count.get({name:item.name}).level==4,
-                    active: selected.area==item
-                }" @click="selected.area=item">
-                    <div class="t">{{item.name}}</div>
-                    <div class="n">{{table.forecast3.count.get({name:item.name}).value}}</div>
-                </div>
-            </div>
-            <div class="msg">
-                <div v-for="item in table.forecast3.tip" class="it">
-                    <span v-if="item.level==0" class="dot lv0"></span>
-                    <span v-if="item.level==1" class="dot lv1"></span>
-                    <span v-if="item.level==2" class="dot lv2"></span>
-                    <span v-if="item.level==3" class="dot lv3"></span>
-                    <span v-if="item.level==4" class="dot lv4"></span>
-                    <div class="txt">{{item.msg}}</div>
-                </div>
-            </div>
-        </div>
-        <div class="R2 Ro">
-            <div class="rt">未来5分钟人数预测</div>
-            <div class="ls">
-                <div v-for="item in table.area" class="it fxcm area" :style="{width:areaPercent(item)}" :class="{
-                    lv0: table.forecast3.count.get({name:item.name}).level==0,
-                    lv1: table.forecast3.count.get({name:item.name}).level==1,
-                    lv2: table.forecast3.count.get({name:item.name}).level==2,
-                    lv3: table.forecast3.count.get({name:item.name}).level==3,
-                    lv4: table.forecast3.count.get({name:item.name}).level==4,
-                    active: selected.area==item
-                }" @click="selected.area=item">
-                    <div class="t">{{item.name}}</div>
-                    <div class="n">{{table.forecast5.count.get({name:item.name}).value}}</div>
-                </div>
-            </div>
-            <div class="msg">
-                <div v-for="item in table.forecast5.tip" class="it">
-                    <span v-if="item.level==0" class="dot lv0"></span>
-                    <span v-if="item.level==1" class="dot lv1"></span>
-                    <span v-if="item.level==2" class="dot lv2"></span>
-                    <span v-if="item.level==3" class="dot lv3"></span>
-                    <span v-if="item.level==4" class="dot lv4"></span>
-                    <div class="txt">{{item.msg}}</div>
-                </div>
-            </div>
-        </div>
-        <div class="R3 Ro">
-            <div class="rt">未来10分钟人数预测</div>
-            <div class="ls">
-                <div v-for="item in table.area" class="it fxcm area" :style="{width:areaPercent(item)}" :class="{
-                    lv0: table.forecast3.count.get({name:item.name}).level==0,
-                    lv1: table.forecast3.count.get({name:item.name}).level==1,
-                    lv2: table.forecast3.count.get({name:item.name}).level==2,
-                    lv3: table.forecast3.count.get({name:item.name}).level==3,
-                    lv4: table.forecast3.count.get({name:item.name}).level==4,
-                    active: selected.area==item
-                }" @click="selected.area=item">
-                    <div class="t">{{item.name}}</div>
-                    <div class="n">{{table.forecast10.count.get({name:item.name}).value}}</div>
-                </div>
-            </div>
-            <div class="msg">
-                <div v-for="item in table.forecast10.tip" class="it">
-                    <span v-if="item.level==0" class="dot lv0"></span>
-                    <span v-if="item.level==1" class="dot lv1"></span>
-                    <span v-if="item.level==2" class="dot lv2"></span>
-                    <span v-if="item.level==3" class="dot lv3"></span>
-                    <span v-if="item.level==4" class="dot lv4"></span>
-                    <div class="txt">{{item.msg}}</div>
-                </div>
+        <!-- 视频 -->
+        <div v-if="vv" class="Vd" @click.self="vv=false">
+            <div class="bd">
+                <img src="">
+                <img src="img/loading.gif" style="width:.32rem;height:.32rem">
             </div>
         </div>
     </div>
@@ -180,12 +206,25 @@
             }
         })
     })
+    vue.$watch('table.historyCount', function() {
+        var data = vue.table.historyCount
+        chartZo.setOption({
+            xAxis: {
+                data: data.col('time')
+            },
+            series: {
+                data: data
+            }
+        })
+    })
     vue.$watch('selected.area', function() {
         vue.subAreaLoad(vue.selected.area)
         vue.subCountLoad(vue.selected.area)
+        vue.historyCountLoad(vue.selected.area)
     })
     // 子图定位
     vue.$watch('table.subArea', function() {
+        if (Object.isEmpty(vue.table.subArea)) return
         var mapWidth = 1525
         var mapHeight = 539
         var viewWidth = 616
@@ -222,25 +261,27 @@
         }
     })
 
-    vue.areaLoad()
-    vue.countLoad()
-    vue.forecastLoad(3)
-    vue.forecastLoad(5)
-    vue.forecastLoad(10)
-    setInterval(function() {
+    function loadData() {
+        vue.areaLoad()
         vue.countLoad()
         vue.forecastLoad(3)
         vue.forecastLoad(5)
         vue.forecastLoad(10)
-	    vue.areaLoad()
-    }, 10000)
+    }
+    loadData()
+    setInterval(loadData, 50000)
+
+    // 初始
+    vue.vx=!vue.vx;vue.selected.area={id:0,name:'总区域'}
     </script>
     <script>
     var chart = echarts.init(document.getElementById('chart'));
     var option = {
         tooltip: {
             trigger: 'item',
-            formatter: "{b} {a} {c}"
+            formatter: function(item) {
+                console.log(item)
+            }
         },
         color: ['#e76d1e', '#1b64d5', '#19dbd4', '#13a436', '#ecd514'], //手动设置每个图例的颜色
         legend: {
@@ -294,7 +335,101 @@
         }]
     };
     chart.setOption(option)
-    onresize = chart.resize
+    </script>
+    <script>
+    // 线图
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            formatter: "{b} {a} {c}"
+        },
+        grid: {
+            top: '25',
+            left: '10',
+            bottom: '5',
+            right: '15',
+            containLabel: true
+        },
+        xAxis: {
+            axisTick: {
+                show: false,
+                inside: true,
+            },
+            axisLabel: {
+                // inside: true,
+                color: '#fff',
+                formatter: function(v) {
+                    return v.split(' ').join('\n')
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#fff'
+                },
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#888'
+                }
+            },
+            data: [1, 2, 3, 4, 5],
+            data: []
+        },
+        yAxis: {
+            axisLine: {
+                show: false
+            },
+            splitLine: {
+                // show: false,
+                lineStyle: {
+                    color: 'rgba(255,255,255,.25)'
+                }
+            },
+            axisTick: {
+                show: false,
+                inside: true
+            },
+            axisLabel: {
+                // inside: true,
+                // rotate: 45,
+                color: '#fff',
+                margin: 2,
+                formatter: function f(value, index) {
+                    for (var i = 0; true; i++) {
+                        var v = value / 10000;
+                        if (v < 1) break;
+                        value = v;
+                    }
+                    return (+value.toFixed(1)) +
+                        Array(i % 2 + 1).join('万') +
+                        Array(parseInt(i / 2) + 1).join('亿')
+                }
+            },
+
+        },
+        series: [{
+            type: 'line',
+            smooth: true,
+            symbolSize: 8,
+            data: [2000, 3000, 4000, 2000, 6000, 2000, 7000],
+            data: [],
+            lineStyle: {
+                normal: {
+                    width: 2, //连线粗细
+                    color: "#0af" //连线颜色
+                }
+            },
+        }, ]
+    };
+    var chartZo = echarts.init(document.getElementById('Zo'));
+    chartZo.setOption(option)
+
+    onresize = function() {
+        setTimeout(function() {
+            chart.resize()
+            chartZo.resize()
+        }, 500)
+    }
     </script>
 </body>
 

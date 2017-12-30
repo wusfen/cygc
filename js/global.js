@@ -1,4 +1,3 @@
-
 ajax.base = location.origin + '/labelling_platform/'
 if (location.protocol == 'file:') {
     ajax.base = 'http://10.4.91.91:8080/labelling_platform/'
@@ -11,9 +10,10 @@ var vue = new Vue({
     data: {
         table: {
             area: [],
-            subArea: [],
             count: [],
+            subArea: [],
             subCount: [],
+            historyCount: [],
             forecast3: {
                 count: [],
                 tip: [],
@@ -37,6 +37,8 @@ var vue = new Vue({
         hover: {
             track: {},
         },
+        vx: true, // 翻转
+        vv: false, // 直播弹窗
         subAreaPosition: {},
         total: 0,
         loading: false,
@@ -104,6 +106,19 @@ var vue = new Vue({
                 }
             })
         },
+        historyCountLoad: function(area) {
+            ajax({
+                local: 'data/chart.line.json',
+                url: 'trajectory/chart.do',
+                data: {
+                    area_id: area.id
+                },
+                success: function(res) {
+                    var data = res.data || []
+                    vue.table.historyCount = data
+                }
+            })
+        },
         forecastLoad: function(m) {
             $.ajax({
                 local: 'data/forecast.json',
@@ -136,6 +151,7 @@ var vue = new Vue({
             ajax({
                 local: 'data/listPersonTrajectory.json',
                 // local: 'data/track.json',
+                // local: 'data/t.json',
                 url: 'trajectory/listPersonTrajectory.do',
                 data: {
                     identity_id: vue.selected.person.no
@@ -150,8 +166,10 @@ var vue = new Vue({
             })
         },
         trackDraw: function(isFirst) {
-            // isFirst = false // !!! 去掉延时
-            clearTimeout(vue._t_td)
+            isFirst = false // !!! 去掉延时 ** 中间断？？
+            clearTimeout(vue._t1)
+            clearTimeout(vue._t2)
+            clearTimeout(vue._t3)
             // context.moveTo(item.x, item.y)
             var list = vue.table.track
 
@@ -160,32 +178,43 @@ var vue = new Vue({
             context.strokeStyle = 'rgba(255,255,255, 1)'
             context.lineWidth = 2
 
-            if (isFirst) {
-                for (var i = 0; i < list.length-100; i++) {
-                    draw(i)
-                }
-                ! function loop(i) {
-                    vue._t_td = setTimeout(function() {
-                        draw(i)
-                        i < list.length - 1 && loop(i + 1)
-                    },1)
-                }(100>list.length?0:100)
-            } else {
-                for (var i = 0; i < list.length; i++) {
-                    draw(i)
-                }
+            var group = list.groupBy('mac')
+            var i = 0
+            for (var key in group) {
+                var arr = group[key]
+                vue['_t' + i] = drawL(arr)
+                i++
             }
 
-            function draw(i) {
-                var item = list[i]
-                var next = list[i + 1]
-                if (item && next) {
-                    context.beginPath()
-                    context.moveTo(item.x, item.y)
-                    context.lineTo(next.x, next.y)
-                    context.stroke()
-                    context.closePath()
+            function drawL(list) { // return timer
+                var timer;
+                if (isFirst) {
+                    for (var i = 0; i < list.length - 100; i++) {
+                        drawI(i)
+                    }! function loop(i) {
+                        timer = setTimeout(function() {
+                            drawI(i)
+                            i < list.length - 1 && loop(i + 1)
+                        }, 1)
+                    }(100 > list.length ? 0 : 100)
+                } else {
+                    for (var i = 0; i < list.length; i++) {
+                        drawI(i)
+                    }
                 }
+
+                function drawI(i) {
+                    var item = list[i]
+                    var next = list[i + 1]
+                    if (item && next) {
+                        context.beginPath()
+                        context.moveTo(item.x, item.y)
+                        context.lineTo(next.x, next.y)
+                        context.stroke()
+                        context.closePath()
+                    }
+                }
+                return timer
             }
         },
         play: function(src) {

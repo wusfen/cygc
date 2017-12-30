@@ -1,7 +1,8 @@
-[v-cloak]{
+[v-cloak] {
     opacity: 0;
 }
-#vue{
+
+#vue {
     -webkit-transition: .3s;
     -o-transition: .3s;
     -moz-transition: .3s;
@@ -10,8 +11,8 @@
 
 * {
     -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -32,7 +33,7 @@ html {
     background-color: rgba(0, 0, 0, .8) !important;
 }
 
-.curp{
+.curp {
     cursor: pointer;
 }
 
@@ -53,25 +54,25 @@ html {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
 }
 
 .aic {
     -ms-align-items: center;
     -webkit-box-align: center;
     -webkit-align-items: center;
-       -moz-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 .jcc {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
-       -moz-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 .fxcm {
@@ -86,15 +87,17 @@ html {
     -ms-align-items: center;
     -webkit-box-align: center;
     -webkit-align-items: center;
-       -moz-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
-       -moz-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
+
+
 
 /* frame */
 
@@ -102,8 +105,8 @@ html {
     height: 100%;
     background: #172450 url(../img/bg.png) center;
     -moz-background-size: cover;
-      -o-background-size: cover;
-         background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .header {
@@ -116,11 +119,11 @@ html {
     margin: auto;
     background: url(../img/header.png) top no-repeat;
     -moz-background-size: contain;
-      -o-background-size: contain;
-         background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
 }
 
-.header.p2{
+.header.p2 {
     background-image: url(../img/header.2.png);
 }
 
@@ -152,10 +155,12 @@ html {
     height: 100%;
     background: url(../img/p1.l.png) center;
     -moz-background-size: contain;
-      -o-background-size: contain;
-         background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
     /*opacity: .6;*/
 }
+
+
 
 /*地图*/
 
@@ -169,8 +174,8 @@ html {
     bottom: 0;
     background: url(../img/m2.png) center;
     -moz-background-size: contain;
-      -o-background-size: contain;
-         background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
 }
 
 .Mo.p1 {
@@ -180,13 +185,13 @@ html {
     right: 0;
     bottom: 0;
     -webkit-transform: rotateY(30.8deg) scale(.95);
-       -moz-transform: rotateY(30.8deg) scale(.95);
-            transform: rotateY(30.8deg) scale(.95);
+    -moz-transform: rotateY(30.8deg) scale(.95);
+    transform: rotateY(30.8deg) scale(.95);
     -webkit-transform-origin: left;
-       -moz-transform-origin: left;
-        -ms-transform-origin: left;
-         -o-transform-origin: left;
-            transform-origin: left;
+    -moz-transform-origin: left;
+    -ms-transform-origin: left;
+    -o-transform-origin: left;
+    transform-origin: left;
 }
 
 .Mo canvas {
@@ -194,7 +199,7 @@ html {
     height: 100%;
 }
 
-.map{
+.map {
     position: absolute;
     top: 0;
     left: 0;
@@ -202,11 +207,11 @@ html {
     height: 5.39rem;
     background: url(../img/m2.png) center;
     -moz-background-size: contain;
-      -o-background-size: contain;
-         background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
 }
 
-.area{
+.area {
     float: left;
     width: 10%;
     height: 2.92rem;
@@ -216,16 +221,17 @@ html {
     top: 2.33rem;
     text-shadow: 4px 3px 4px #fff;
     text-shadow: 7px 3px 8px #909090;
+    text-shadow: 4px 1px 8px #000000;
     -webkit-transition: .3s;
     -o-transition: .3s;
     -moz-transition: .3s;
     transition: .3s;
 }
 
-.area.active{
+.area.active {
     -webkit-box-shadow: inset 2px 2px 9px 0px rgba(0, 0, 0, 0.61);
-       -moz-box-shadow: inset 2px 2px 9px 0px rgba(0, 0, 0, 0.61);
-            box-shadow: inset 2px 2px 9px 0px rgba(0, 0, 0, 0.61);
+    -moz-box-shadow: inset 2px 2px 9px 0px rgba(0, 0, 0, 0.61);
+    box-shadow: inset 2px 2px 9px 0px rgba(0, 0, 0, 0.61);
 }
 
 .lv0 {
@@ -262,14 +268,24 @@ html {
 .Mo .ls .it {}
 
 .Mo .ls .it .t {
-    font-size: 0.2rem;
+    font-size: 0.25rem;
     color: #fff;
 }
 
 .Mo .ls .it .n {
     font-size: 0.48rem;
     color: #1bf2ef;
+    color: #0010ff;
 }
+
+.Mo .ls .it .a{
+    font-size: 0.4rem;
+    color: #f00;
+}
+.Mo .ls .it .a.r{
+    color: #0f0;
+}
+
 
 /*轨迹*/
 
@@ -281,17 +297,18 @@ html {
     height: .06rem;
     margin-left: -.03rem;
     margin-top: -.03rem;
-    background: #79bef5;
+    background: #1800ff;
     -webkit-border-radius: 9em;
-       -moz-border-radius: 9em;
-            border-radius: 9em;
+    -moz-border-radius: 9em;
+    border-radius: 9em;
     -webkit-transition: .25s;
     -o-transition: .25s;
     -moz-transition: .25s;
     transition: .25s;
 }
 
-.Mo .ts .it.type00x { /*非 000*/
+.Mo .ts .it.type00x {
+    /*非 000*/
     cursor: pointer;
     width: .16rem;
     height: .16rem;
@@ -305,57 +322,58 @@ html {
 .Mo .ts .it.type00x:hover {
     border: solid 1px #fff;
     -webkit-transform: scale(1.5);
-       -moz-transform: scale(1.5);
-        -ms-transform: scale(1.5);
-         -o-transform: scale(1.5);
-            transform: scale(1.5);
-            z-index: 3;
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    transform: scale(1.5);
+    z-index: 3;
 }
 
 .Mo .ts .it.active {
     background: #ff1313;
     -webkit-box-shadow: 2px 3px 8px #790800;
-       -moz-box-shadow: 2px 3px 8px #790800;
-            box-shadow: 2px 3px 8px #790800;
+    -moz-box-shadow: 2px 3px 8px #790800;
+    box-shadow: 2px 3px 8px #790800;
     border: solid 1px #fff;
     -webkit-transform: scale(1.8);
-       -moz-transform: scale(1.8);
-        -ms-transform: scale(1.8);
-         -o-transform: scale(1.8);
-            transform: scale(1.8);
-            pointer-events: none;
-            z-index: 2;
+    -moz-transform: scale(1.8);
+    -ms-transform: scale(1.8);
+    -o-transform: scale(1.8);
+    transform: scale(1.8);
+    pointer-events: none;
+    z-index: 2;
 }
 
-.Mo .ts .it.active:hover{
+.Mo .ts .it.active:hover {
     opacity: .5;
 }
 
-.Mo .ts ol{
+.mvs {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     overflow: auto;
     list-style: none;
-    background: rgba(0,0,0,.3);
+    background: rgba(0, 0, 0, .3);
     padding: .05rem 2px .05rem;
     text-align: right;
+    z-index: 100;
 }
 
-.Mo .ts ol li{
+.mvs li {
     font-size: .20rem;
     color: #26e7ec;
     cursor: pointer;
     border: solid 1px transparent;
 }
 
-.Mo .ts ol li.hover,
-.Mo .ts ol li:hover{
+.mvs li.hover,
+.mvs li:hover {
     border: solid 1px #fff;
 }
 
-.Mo .ts ol li.active{
+.mvs li.active {
     color: #ff1313;
     border: solid 1px #fff;
 }
@@ -371,7 +389,7 @@ html {
     transition: .3s;
 }
 
-.Mo .ts .p:hover{
+.Mo .ts .p:hover .i{
     opacity: .2;
 }
 
@@ -379,14 +397,14 @@ html {
     width: 1.14rem;
     height: 1.14rem;
     -webkit-border-radius: 99em;
-       -moz-border-radius: 99em;
-            border-radius: 99em;
+    -moz-border-radius: 99em;
+    border-radius: 99em;
     overflow: hidden;
     /*border: solid 1px #f00;*/
     background: #eee;
     -webkit-box-shadow: 0px 0px 10px #ff0000;
-       -moz-box-shadow: 0px 0px 10px #ff0000;
-            box-shadow: 0px 0px 10px #ff0000;
+    -moz-box-shadow: 0px 0px 10px #ff0000;
+    box-shadow: 0px 0px 10px #ff0000;
     position: absolute;
     bottom: .15rem;
     left: -.57rem;
@@ -403,6 +421,19 @@ html {
     border-top-color: #f00;
 }
 
+.Mo .ts .p .m {
+    position: absolute;
+    bottom: 1.6rem;
+    width: 3rem;
+    margin-left: -1.5rem;
+    font-size: .2rem;
+    color: #f00;
+    text-align: center;
+    text-shadow: 4px 1px 8px #000000;
+}
+
+
+
 /*环图*/
 
 .Co {
@@ -416,6 +447,19 @@ html {
     text-align: center;
 }
 
+.Co .ct{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    z-index: 99;
+    width: 2rem;
+    height: 2rem;
+    margin: auto;
+}
+
 .Co #chart {
     width: 100%;
     height: 100%;
@@ -424,61 +468,56 @@ html {
 .Co .t {
     font-size: 0.24rem;
     color: #fcd300;
-    position: absolute;
-    top: 1.5rem;
-    left: 0;
-    right: 0;
-    bottom: 0;
 }
 
 .Co .n {
     font-size: 0.47rem;
     color: #fcd300;
-    position: absolute;
-    top: 1.83rem;
-    left: 0;
-    right: 0;
-    bottom: 0;
 }
+
+
 
 /*子图*/
 
-.So {
-    width: 6.16rem;
-    height: 3.61rem;
+.Xo {
     position: absolute;
-    top: 6.88rem;
-    left: 6.46rem;
+    top: 6.7rem;
+    left: 5.77rem;
     right: 0;
     bottom: 0;
+    width: 7.08rem;
+    height: 3.9rem;
+    background: url(../img/box2.png);
+    background-size: contain;
 }
 
-.So .st{
-    position: absolute;
-    top: 0.74rem;
-    right: 100%;
-    margin-right: .33rem;
-    font-size: .222rem;
-    color: #1bf2ef;
-    width: .23rem;
-    height: 1.75rem;
-    background: #0a1935;
-    text-align: center;
-    margin-top: -.02rem;
-    padding-top: .02rem;
-    height: 1.8rem;
-}
-
-.So .slice{
+.Xo .xt {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    overflow: hidden;
+    bottom: .3rem;
+    width: 0.47rem;
+    font-size: 0.222rem;
+    color: #1bf2ef;
+    padding: .2rem;
+    text-align: center;
 }
 
-.So .slice .Mo {
+.Xo .slice {
+    position: absolute;
+    top: 0.18rem;
+    left: 0.79rem;
+    right: 0;
+    bottom: 0;
+    width: 6.16rem;
+    height: 3.61rem;
+    background-color: rgba(9, 27, 55, 0.2);
+    overflow: hidden;
+    transition: .3s;
+}
+
+.Xo .slice .Mo {
     position: absolute;
     top: -2rem;
     left: 0;
@@ -487,6 +526,26 @@ html {
     -moz-transition: .3s;
     transition: .3s;
 }
+
+
+/* 线图 */
+
+.Zo {
+    position: absolute;
+    top: 6.63rem;
+    left: 6.28rem;
+    right: 0;
+    bottom: 0;
+    width: 6.6rem;
+    height: 4rem;
+    transition: .3s;
+}
+
+.rotateY90{
+    transform: rotateY(90deg);
+}
+
+
 
 /*预测*/
 
@@ -519,11 +578,22 @@ html {
     height: 3.24rem;
 }
 
-.Ro .rt{
+.Ro .rt {
     font-size: 0.24rem;
     color: #1bf2ef;
     position: absolute;
     top: 0.07rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    line-height: 1;
+}
+
+.Ro .tt{
+    font-size: 0.24rem;
+    color: #fff;
+    position: absolute;
+    top: .35rem;
     left: 0;
     right: 0;
     text-align: center;
@@ -585,14 +655,13 @@ html {
     line-height: 1.5;
     font-size: 0.14rem;
     position: relative;
-
 }
 
 .Ro .msg .it .dot {
     display: inline-block;
     -webkit-border-radius: 9em;
-       -moz-border-radius: 9em;
-            border-radius: 9em;
+    -moz-border-radius: 9em;
+    border-radius: 9em;
     width: 0.1rem;
     height: 0.1rem;
     /*background-color: #ff0000;*/
@@ -605,6 +674,8 @@ html {
     color: #ededed;
     text-indent: 1em;
 }
+
+
 
 /*人员列表*/
 
@@ -638,8 +709,8 @@ html {
     width: 1.14rem;
     height: 1.14rem;
     -webkit-border-radius: 99em;
-       -moz-border-radius: 99em;
-            border-radius: 99em;
+    -moz-border-radius: 99em;
+    border-radius: 99em;
     background: #eee;
     overflow: hidden;
 }
@@ -662,6 +733,8 @@ html {
     color: #fd4d45;
 }
 
+
+
 /*视频*/
 
 .Vo {
@@ -675,7 +748,7 @@ html {
     background: #000;
 }
 
-.Vo .vt{
+.Vo .vt {
     font-size: .145rem;
     color: #c8d4f8;
     position: absolute;
@@ -687,8 +760,8 @@ html {
     line-height: 1;
     background: #0f224b;
     -webkit-box-shadow: 0px 0px 3px 0.02rem #0f224b;
-       -moz-box-shadow: 0px 0px 3px 0.02rem #0f224b;
-            box-shadow: 0px 0px 3px 0.02rem #0f224b;
+    -moz-box-shadow: 0px 0px 3px 0.02rem #0f224b;
+    box-shadow: 0px 0px 3px 0.02rem #0f224b;
 }
 
 .Vo video {
@@ -696,23 +769,69 @@ html {
     height: 100%;
 }
 
-.Vo object{
-    position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;
+.Vo object {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
     width: 100%;
     height: 100%;
+    z-index: 99;
+}
+
+.Vo .loading {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 2px 1px 1px #484848;
+    z-index: 651;
     z-index: 999;
 }
 
-.Vo .loading{
-    position: absolute; width: 32px; height: 32px; top: 0; left: 0; right: 0; bottom: 0; margin: auto; text-align: center; color: #FFFFFF; text-shadow: 2px 1px 1px #484848; z-index: 651;
-    z-index: 999;
-}
-
-.Vo .loading img{
+.Vo .loading img {
     display: block;
     width: 100%;
     height: 100%;
 }
+
+/* 弹出直播 */
+.Vd{
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: .3s;
+}
+
+.Vd .bd{
+    width: 8rem;
+    height: 6rem;
+    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    box-shadow: 0px 0px 15px #000
+}
+
+.Vd .bd img{
+    display: block;
+    width: 100%;
+}
+
 
 /*身份*/
 
@@ -748,30 +867,32 @@ html {
     background-color: rgba(123, 123, 123, 0.21);
 }
 
+
+
 /**/
 
 @media screen {
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
         width: 14px;
         height: 14px
     }
-    ::-webkit-scrollbar-track,
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-track,
+     ::-webkit-scrollbar-thumb {
         -webkit-border-radius: 999px;
-                border-radius: 999px;
+        border-radius: 999px;
         border: 5px solid transparent
     }
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
         -webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, .05) inset;
-                box-shadow: 1px 1px 5px rgba(0, 0, 0, .05) inset
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, .05) inset
     }
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
         min-height: 20px;
         background-clip: content-box;
         -webkit-box-shadow: 0 0 0 5px rgba(125, 125, 125, 0.5) inset;
-                box-shadow: 0 0 0 5px rgba(125, 125, 125, 0.5) inset
+        box-shadow: 0 0 0 5px rgba(125, 125, 125, 0.5) inset
     }
-    ::-webkit-scrollbar-corner {
+     ::-webkit-scrollbar-corner {
         background: transparent
     }
 }

@@ -10,7 +10,8 @@
         "src": "http://15.120.20.109:10039/labelling_platform/trajectory/video.do?flag=sftp&video_name=liuruopeng_20171229000702193177_14A.mp4",
         "reportTime": "Dec 29, 2017 12:07:02 AM",
         "deviceName": "14A",
-        "type": "1"
+        "type": "1",
+        "mac": "mmmmmmmmmmmmmmm"
     },
     {
         "id": "20171229000702967471",

@@ -3,35 +3,53 @@
     "msg": "success",
     "data":
     {
-        "count": [
+      "count":[
         {
-            "areaId": 1,
-            "name": "A区",
-            "value": 123,
-            "level": 1,
+          "level":"0",
+          "name":"A区",
+          "value":4
         },
         {
-            "areaId": 1,
-            "name": "B区",
-            "value": 456,
-            "level": 2,
-        }],
-        "tip": [
-        {
-            "level": 1,
-            "msg": "A区人数持续增加，请及时调控",
+          "level":"0",
+          "name":"B区",
+          "value":1
         },
         {
-            "level": 1,
-            "msg": "A区人数持续增加，请及时调控",
+          "level":"0",
+          "name":"C区",
+          "value":5
         },
         {
-            "level": 1,
-            "msg": "A区人数持续增加，请及时调控",
+          "level":"0",
+          "name":"D区",
+          "value":2
         },
         {
-            "level": 1,
-            "msg": "A区人数持续增加，请及时调控",
-        }]
-    }
+          "level":"0",
+          "name":"E区",
+          "value":4
+        },
+        {
+          "level":"0",
+          "name":"F区",
+          "value":17
+        },
+        {
+          "level":"0",
+          "name":"G区",
+          "value":5
+        },
+        {
+          "level":"0",
+          "name":"H区",
+          "value":176
+        }
+      ],
+      "tip":[
+        {
+          "level":"0",
+          "msg":"正常"
+        }
+      ]
+    },
 }

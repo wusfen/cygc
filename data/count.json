@@ -2,40 +2,69 @@
     "error": 0,
     "msg": "success",
     "data": [
-    {
-    	"areaId": 1,
-        "name": "A区",
-        "value": 123,
-        "level": 1,
-    },
-    {
-    	"areaId": 2,
-        "name": "B区",
-        "value": 456,
-        "level": 2,
-    },
-    {
-    	"areaId": 3,
-        "name": "C区",
-        "value": 456,
-        "level": 3,
-    },
-    {
-        "areaId": 4,
-        "name": "D区",
-        "value": 456,
-        "level": 4,
-    },
-    {
-        "areaId": 5,
-        "name": "B1区",
-        "value": 100,
-        "level": 4,
-    },
-    {
-        "areaId": 6,
-        "name": "B2区",
-        "value": 200,
-        "level": 3,
-    }]
+      {
+        "id":1,
+        "name":"江堤8号通道",
+        "value":554,
+        "level":0,
+        "parentId":0,
+        "increatment":0
+      },
+      {
+        "id":2,
+        "name":"江堤7号通道",
+        "value":45,
+        "level":0,
+        "parentId":0,
+        "increatment":0
+      },
+      {
+        "id":3,
+        "name":"江堤6-7号通道",
+        "value":107,
+        "level":0,
+        "parentId":0,
+        "increatment":0
+      },
+      {
+        "id":4,
+        "name":"江堤5号通道",
+        "value":1,
+        "level":0,
+        "parentId":0,
+        "increatment":0
+      },
+      {
+        "id":5,
+        "name":"江堤6号通道",
+        "value":133,
+        "level":0,
+        "parentId":0,
+        "increatment":0.2
+      },
+      {
+        "id":6,
+        "name":"陈毅广场北侧",
+        "value":165,
+        "level":0,
+        "parentId":0,
+        "increatment":0
+      },
+      {
+        "id":7,
+        "name":"陈毅广场南侧",
+        "value":158,
+        "level":0,
+        "parentId":0,
+        "increatment":0
+      },
+      {
+        "id":8,
+        "name":"江堤4号通道",
+        "value":217,
+        "level":0,
+        "parentId":0,
+        "increatment":0
+      }
+    ],
 }
