@@ -28,10 +28,11 @@
     </script>
     <link rel="stylesheet" type="text/css" href="css/global.css">
     <style type="text/css">
-    body{
+    body {
         font-size: 18%;
         color: #fff;
     }
+
     .container .backdraw {
         background-image: url(img/p2.l.png);
     }
@@ -58,36 +59,18 @@
         <div class="Mo">
             <canvas id="canvas" width="1525" height="539"></canvas>
             <div class="ts">
-                <!-- 人头像 -->
-                <div v-if="!Object.isEmpty(table.track)" class="p" :style="{top:rem(table.track.last().y),left:rem(table.track.last().x)}">
-                    <img class="i" :src="selected.person.avatar">
+                <!-- group -->
+                <div v-for="item in table.trackTest.groupBy('mac')" class="p" :style="{top:rem(item.last().y),left:rem(item.last().x)}">
+                    <img class="i" :src="table.personTest.get({mac:item.last().mac}).avatar">
                     <span class="d"></span>
-                    <span class="m">mac: {{table.track.get({'mac!=':0}).mac}}</span>
+                    <!-- <span class="m">mac: {{table.track.get({'mac!=':0}).mac}}</span> -->
                 </div>
             </div>
         </div>
         <!-- 视频 -->
         <div class="Vo">
             <div class="vt">人员监控-{{selected.track.deviceName}}</div>
-            <!-- <video src="http://10.4.91.126:8080/123.mp4" controlsxxx autoplay loop></video> -->
-            <!-- <video>
-                <source src="ftp://uftp:uftp@10.4.91.233/mp/123.mp4" controls type="video/mp4"></source>
-            </video> -->
-            <!-- <div id="player" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0"></div> -->
-            <video id="video" ref="video" controlsxx autoplay loop @dblclick="videoFullscreen()"></video>
-            <div v-if="loading" class="loading">
-                <img src="img/loading.gif">
-            </div>
-            <!-- 摄像头视频列表 -->
-            <ol class="mvs" @mouseleave="hover.track={}">
-                <li v-for="(item,index) in table.track.select({'type!=':'000',deviceName:selected.track.deviceName})" xv-if="item.type!='000'" :class="{
-                    type00x:item.type!='000',
-                    active:[selected.track].eq([item])&&item.type!='000',
-                }" @click="item.type!='000'&&(play(item.src),(selected.track=item))" @mouseenter="hover.track=item">
-                    <span>{{index+1}}</span>
-                    <!-- <span>{{item.deviceName}}</span> -->
-                </li>
-            </ol>
+            <img id="videoImg">
         </div>
         <!-- 人员信息 -->
         <div v-if="selected.personTest" class="Io">
@@ -116,12 +99,16 @@
         vue.trackTestDraw()
     })
     vue.$watch('table.personTest', function() {
-        vue.selected.personTest=vue.table.personTest.get({isVideo:true})
+        vue.selected.personTest = vue.table.personTest.get({ isVideo: true })
+    })
+    vue.$watch('currentVideoIp', function() {
+        videoImg.src = 'http://15.120.20.109:10076/video_feed?ip=' + vue.currentVideoIp
     })
 
     function load() {
         vue.personTestLoad()
         vue.trackTestLoad()
+        vue.currentVideoIpSearch()
     }
     load()
     setInterval(function() {
